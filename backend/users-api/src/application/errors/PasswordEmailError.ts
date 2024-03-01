@@ -1,7 +1,7 @@
-export class PasswordEmailError extends Error {
-  public status: string;
-  constructor(message = 'Email or password incorrect') {
-    super(message);
-    this.status = '400';
+import { CustomError } from './CustomError';
+
+export class PasswordEmailError extends CustomError {
+  constructor(message = 'Password or email incorrect') {
+    super(message, 400);
   }
 }
