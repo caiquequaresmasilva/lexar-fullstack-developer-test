@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { Options } from 'sequelize';
+import pg from 'pg';
 
 const config: Options = {
   username: process.env.POSTGRES_USER,
@@ -14,6 +15,7 @@ const config: Options = {
       require: true,
     },
   },
+  dialectModule: pg,
   logging: false,
 };
 
