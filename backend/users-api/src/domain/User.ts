@@ -29,4 +29,8 @@ export class User extends BaseEntity<UserProps> {
   public get email(): string {
     return this.props.email;
   }
+
+  public get password(): string {
+    return this.props.password;
+  }
 }
