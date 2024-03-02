@@ -10,7 +10,9 @@ export interface UserProps {
 export class User extends BaseEntity<UserProps> {
   constructor(props: UserProps, id?: string) {
     super(props, id);
-    this.props.password = this._hashPassword(this.props.password);
+    if (!id){
+      this.props.password = this._hashPassword(this.props.password);
+    }
   }
 
   private _hashPassword(password: string): string {
