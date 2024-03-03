@@ -2,13 +2,14 @@ import { Request, Response } from 'express';
 import { ProductService } from '../../../application/services';
 import { CustomError } from '../../../application/errors';
 import { FilterParams } from '../../../application/repositories';
+import { ProductProps } from '../../../domain';
 
 export class ProductController {
   constructor(private readonly service: ProductService) {}
   async create(req: Request, res: Response): Promise<void> {
-    const { name, brand, model, color, price } = req.body;
+    const productRequest: ProductProps[] = req.body;
     try {
-      await this.service.create({ name, brand, model, color, price });
+      await this.service.create(productRequest);
       res.status(201);
     } catch (error) {
       if (error instanceof CustomError) {
@@ -22,10 +23,10 @@ export class ProductController {
   }
 
   async update(req: Request, res: Response): Promise<void> {
-    const { name, brand, model, color, price } = req.body;
+    const productRequest: ProductProps[] = req.body;
     const { id } = req.params;
     try {
-      await this.service.update(id, { name, brand, model, color, price });
+      await this.service.update(id, productRequest);
       res.status(200);
     } catch (error) {
       if (error instanceof CustomError) {

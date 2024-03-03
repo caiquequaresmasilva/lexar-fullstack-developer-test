@@ -5,31 +5,23 @@ import { FilterParams, IProductRepository } from '../repositories';
 export class ProductService {
   constructor(private readonly repo: IProductRepository) {}
 
-  async create(data: ProductProps): Promise<void> {
-    const exists = await this.repo.exists(data);
-    if (exists) {
+  async create(data: ProductProps[]): Promise<void> {
+    const exists = await Promise.all(data.map(prod => this.repo.exists(prod)));
+    if (exists.some(flag => flag)) {
       throw new ProductExistsError();
     }
-    const { name, brand, model, color, price } = data;
+    const products = data.map(prod => new Product(prod))
 
-    const product = new Product({
-      name,
-      brand,
-      model,
-      color,
-      price,
-    });
-
-    await this.repo.create(product);
+    await this.repo.create(products);
   }
 
-  async update(id: string, data: ProductProps): Promise<void> {
+  async update(id: string, data: ProductProps[]): Promise<void> {
     const product = await this.repo.findById(id);
     if (!product) {
       throw new ProductNotFoundError();
     }
 
-    product.update(data);
+    product.update(data[0]);
     await this.repo.update(product);
   }
 
@@ -49,7 +41,7 @@ export class ProductService {
     return this.repo.filter(params);
   }
 
-  async findAll(): Promise<ProductProps[]>{
-    return this.repo.findAll()
+  async findAll(): Promise<ProductProps[]> {
+    return this.repo.findAll();
   }
 }
