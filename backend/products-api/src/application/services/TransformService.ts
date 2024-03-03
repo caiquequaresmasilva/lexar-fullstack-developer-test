@@ -63,14 +63,16 @@ export class TransformService {
     name,
     details,
     price,
-  }: Type2): Partial<ProductProps> {
-    return {
-      name,
-      brand: details?.brand,
-      model: details?.model,
-      color: details?.color,
-      price,
-    };
+  }: Type2): Partial<ProductProps>[] {
+    return [
+      {
+        name,
+        brand: details?.brand,
+        model: details?.model,
+        color: details?.color,
+        price,
+      },
+    ];
   }
   public async transform(rawProduct: RawProduct) {
     if (Array.isArray(rawProduct)) {
@@ -79,6 +81,6 @@ export class TransformService {
     if ((<Type2>rawProduct).details) {
       return this._transformType2(rawProduct);
     }
-    return rawProduct as Partial<ProductProps>;
+    return [rawProduct as Partial<ProductProps>];
   }
 }
