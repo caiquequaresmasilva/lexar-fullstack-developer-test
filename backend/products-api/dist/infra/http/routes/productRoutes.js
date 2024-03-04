@@ -10,9 +10,9 @@ const productRoutes = (0, express_1.Router)();
 //Middleware de autenticação
 productRoutes.use((req, res, next) => auth.handle(req, res, next));
 productRoutes.get('/', (req, res) => controller.findAll(req, res));
-productRoutes.get('/:id', (req, res) => controller.findById(req, res));
 productRoutes.get('/search', (req, res) => controller.search(req, res));
 productRoutes.get('/filter', (req, res) => controller.filter(req, res));
+productRoutes.get('/:id', (req, res) => controller.findById(req, res));
 productRoutes.delete('/:id', (req, res) => controller.delete(req, res));
 //Middlewares de transformação e validação
 productRoutes.use((req, res, next) => transform.handle(req, res, next));

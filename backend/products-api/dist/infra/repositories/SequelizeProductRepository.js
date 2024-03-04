@@ -58,10 +58,11 @@ class SequelizeProductRepository extends repositories_1.IProductRepository {
         await this.model.bulkCreate(toDB);
     }
     async update(data) {
-        const { id, name, color, brand, price } = await this._mapToDB(data);
+        const { id, name, color, brand, price, model } = await this._mapToDB(data);
         await this.model.update({
             name,
             brand,
+            model,
             color,
             price,
         }, { where: { id } });
