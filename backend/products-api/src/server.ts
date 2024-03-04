@@ -1,11 +1,5 @@
-import express from 'express'
+import App from './infra/App';
 import 'dotenv/config'
 
-const app = express()
-const PORT = process.env.API_PORT
-
-app.get('/', (_req,res) =>{
-    res.status(200).send('Products API: Hello World!')
-})
-
-app.listen(PORT,() => console.log(`Running on port ${PORT}`))
+const PORT = process.env.API_PORT || 3001
+new App().start(PORT)

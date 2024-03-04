@@ -3,11 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
+const App_1 = __importDefault(require("./infra/App"));
 require("dotenv/config");
-const app = (0, express_1.default)();
-const PORT = process.env.API_PORT;
-app.get('/', (_req, res) => {
-    res.status(200).send('Products API: Hello World!');
-});
-app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+const PORT = process.env.API_PORT || 3001;
+new App_1.default().start(PORT);
