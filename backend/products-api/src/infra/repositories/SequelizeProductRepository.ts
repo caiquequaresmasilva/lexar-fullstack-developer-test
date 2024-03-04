@@ -66,11 +66,12 @@ export class SequelizeProductRepository extends IProductRepository {
   }
 
   async update(data: Product): Promise<void> {
-    const { id, name, color, brand, price } = await this._mapToDB(data);
+    const { id, name, color, brand, price, model } = await this._mapToDB(data);
     await this.model.update(
       {
         name,
         brand,
+        model,
         color,
         price,
       },

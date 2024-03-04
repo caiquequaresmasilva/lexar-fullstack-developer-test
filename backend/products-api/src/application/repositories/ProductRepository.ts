@@ -3,7 +3,7 @@ import { Product, ProductProps } from '../../domain';
 export interface FilterParams {
   brand?: string;
   color?: string;
-  price?: [number, number];
+  price?: number[];
 }
 
 export abstract class IProductRepository {

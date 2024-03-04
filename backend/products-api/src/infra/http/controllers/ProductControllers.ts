@@ -10,7 +10,7 @@ export class ProductController {
     const productRequest: ProductProps[] = req.body;
     try {
       await this.service.create(productRequest);
-      res.status(201);
+      res.status(201).json({ message: 'Product created' });
     } catch (error) {
       if (error instanceof CustomError) {
         res.status(error.status).json({ error: error.message });
@@ -27,7 +27,7 @@ export class ProductController {
     const { id } = req.params;
     try {
       await this.service.update(id, productRequest);
-      res.status(200);
+      res.status(200).json({ message: 'Product updated' });
     } catch (error) {
       if (error instanceof CustomError) {
         res.status(error.status).json({ error: error.message });
@@ -43,7 +43,7 @@ export class ProductController {
     const { id } = req.params;
     try {
       await this.service.delete(id);
-      res.status(200);
+      res.status(200).json({ message: 'Product deleted' });
     } catch (error) {
       if (error instanceof CustomError) {
         res.status(error.status).json({ error: error.message });
@@ -77,7 +77,7 @@ export class ProductController {
       const products = await this.service.filter({
         brand,
         color,
-        price,
+        price: JSON.parse(String(price)),
       });
       res.status(200).json(products);
     } catch (error) {
