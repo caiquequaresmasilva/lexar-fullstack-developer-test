@@ -20,10 +20,11 @@ productRoutes.get('/search', (req, res) => controller.search(req, res));
 productRoutes.get('/filter', (req, res) => controller.filter(req, res));
 productRoutes.delete('/:id', (req, res) => controller.delete(req, res));
 
-
 //Middlewares de transformação e validação
 productRoutes.use((req, res, next) => transform.handle(req, res, next));
 productRoutes.use(validationMiddleware);
 
 productRoutes.post('/', (req, res) => controller.create(req, res));
 productRoutes.put('/:id', (req, res) => controller.update(req, res));
+
+export default productRoutes;

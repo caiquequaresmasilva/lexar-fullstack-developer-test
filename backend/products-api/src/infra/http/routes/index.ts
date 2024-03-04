@@ -1,2 +1,2 @@
-export * from './productRoutes';
-export { default as rootRouter } from './rootRouter';
+export { default as productRoutes } from './productRoutes';
+export { default as rootRoutes } from './rootRoutes';
