@@ -77,12 +77,13 @@ class ProductController {
         }
     }
     async filter(req, res) {
-        const { brand, color, price } = req.query;
+        const { brand, color, maxPrice, minPrice } = req.query;
         try {
             const products = await this.service.filter({
                 brand,
                 color,
-                price: JSON.parse(String(price)),
+                maxPrice: maxPrice ? Number(maxPrice) : 0,
+                minPrice: minPrice ? Number(minPrice) : 0,
             });
             res.status(200).json(products);
         }
