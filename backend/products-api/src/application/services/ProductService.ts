@@ -10,7 +10,7 @@ export class ProductService {
     if (exists.some(flag => flag)) {
       throw new ProductExistsError();
     }
-    const products = data.map(prod => new Product(prod))
+    const products = data.map(prod => new Product(prod));
 
     await this.repo.create(products);
   }
@@ -43,5 +43,19 @@ export class ProductService {
 
   async findAll(): Promise<ProductProps[]> {
     return this.repo.findAll();
+  }
+
+  async findById(id: string): Promise<ProductProps> {
+    const product = await this.repo.findById(id);
+    if (!product) {
+      throw new ProductNotFoundError();
+    }
+    return {
+      name: product.name,
+      brand: product.brand,
+      model: product.model,
+      price: product.price,
+      color: product.color,
+    };
   }
 }

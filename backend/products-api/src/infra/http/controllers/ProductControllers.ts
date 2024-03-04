@@ -105,4 +105,20 @@ export class ProductController {
       }
     }
   }
+
+  async findById(req: Request, res: Response): Promise<void> {
+    const { id } = req.params;
+    try {
+      const product = await this.service.findById(id);
+      res.status(200).json(product);
+    } catch (error) {
+      if (error instanceof CustomError) {
+        res.status(error.status).json({ error: error.message });
+      } else {
+        res
+          .status(500)
+          .json({ error: (<Error>error).message || 'Internal server error' });
+      }
+    }
+  }
 }
