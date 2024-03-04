@@ -11,11 +11,12 @@ export class SequelizeProductRepository extends IProductRepository {
     super();
   }
 
-  private async _mapToDB({ id, name, brand, price, color }: Product) {
+  private async _mapToDB({ id, name, brand, price, color, model }: Product) {
     return {
       id,
       name,
       brand,
+      model,
       price,
       color,
     };
@@ -128,6 +129,6 @@ export class SequelizeProductRepository extends IProductRepository {
       },
     });
 
-    return Boolean(product)
+    return Boolean(product);
   }
 }
