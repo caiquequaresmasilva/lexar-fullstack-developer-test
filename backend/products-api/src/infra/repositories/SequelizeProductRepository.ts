@@ -44,20 +44,23 @@ export class SequelizeProductRepository extends IProductRepository {
     };
   }
 
-  private _setParams({ brand, color, price }: FilterParams) {
+  private _setParams({ brand, color, minPrice, maxPrice }: FilterParams) {
     let params = {};
+    const priceRange = [];
+
     if (brand) {
       params = { ...params, brand };
     }
     if (color) {
       params = { ...params, color };
     }
-    if (price) {
-      const priceParam = {
-        [Op.between]: price,
-      };
-      params = { ...params, price: priceParam };
+    if (minPrice) {
+      priceRange.push({ [Op.gte]: minPrice });
     }
+    if (maxPrice) {
+      priceRange.push({ [Op.lte]: maxPrice });
+    }
+    params = { ...params, price: { [Op.and]: priceRange } };
     return params;
   }
   async create(data: Product[]): Promise<void> {
