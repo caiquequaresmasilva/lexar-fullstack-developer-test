@@ -14,11 +14,12 @@ class SequelizeProductRepository extends repositories_1.IProductRepository {
         super();
         this.model = model;
     }
-    async _mapToDB({ id, name, brand, price, color }) {
+    async _mapToDB({ id, name, brand, price, color, model }) {
         return {
             id,
             name,
             brand,
+            model,
             price,
             color,
         };
