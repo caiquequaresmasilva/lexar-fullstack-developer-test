@@ -1,13 +1,16 @@
 import { Model, INTEGER, STRING } from 'sequelize';
 import sequelize from '.';
+import DBColor from './DBColor';
+import DBBrand from './DBBrand';
 
+type Name = { name: string };
 class DBProduct extends Model {
   declare id: string;
   declare name: string;
-  declare brand: string;
   declare model: string;
   declare price: number;
-  declare color: string;
+  declare brand: Name;
+  declare color: Name;
 }
 
 DBProduct.init(
@@ -21,10 +24,6 @@ DBProduct.init(
       allowNull: false,
       type: STRING,
     },
-    brand: {
-      allowNull: false,
-      type: STRING,
-    },
     model: {
       allowNull: false,
       type: STRING,
@@ -33,16 +32,29 @@ DBProduct.init(
       allowNull: false,
       type: INTEGER,
     },
-    color: {
-      allowNull: false,
-      type: STRING,
-    },
   },
   {
     sequelize,
-    modelName: 'products',
+    modelName: 'product',
     timestamps: false,
   },
 );
+
+// Associação dos produtos com as cores
+DBColor.hasMany(DBProduct, {
+  foreignKey: 'colorId',
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION',
+});
+DBProduct.belongsTo(DBColor, { foreignKey: 'colorId', as: 'color' });
+
+// Associação dos produtos com as marcas
+DBBrand.hasMany(DBProduct, {
+  foreignKey: 'brandId',
+  onUpdate: 'CASCADE',
+  onDelete: 'NO ACTION',
+});
+
+DBProduct.belongsTo(DBBrand, { foreignKey: 'brandId', as: 'brand' });
 
 export default DBProduct;
