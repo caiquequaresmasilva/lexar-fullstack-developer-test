@@ -1,13 +1,18 @@
 import express from 'express';
 import cors from 'cors';
-import { rootRoutes, productRoutes  } from './http/routes';
+import {
+  rootRoutes,
+  productRoutes,
+  colorRoutes,
+  brandRoutes,
+} from './http/routes';
 
 export default class App {
   public app: express.Express;
   constructor() {
     this.app = express();
-    this._config()
-    this.setRoutes()
+    this._config();
+    this.setRoutes();
   }
 
   private _config(): void {
@@ -26,6 +31,8 @@ export default class App {
   private setRoutes(): void {
     this.app.use('/', rootRoutes);
     this.app.use('/product', productRoutes);
+    this.app.use('/color', colorRoutes);
+    this.app.use('/brand', brandRoutes);
   }
 
   public start(PORT: string | number): void {
