@@ -13,9 +13,13 @@ module.exports = {
           allowNull:false,
           type: Sequelize.STRING
         },
-        brand: {
+        brandId: {
           allowNull:false,
-          type: Sequelize.STRING
+          type: Sequelize.INTEGER,
+          references:{
+            model: 'brands',
+            key: 'id'
+          }
         },
         model: {
           allowNull:false,
@@ -25,9 +29,13 @@ module.exports = {
           allowNull:false,
           type: Sequelize.INTEGER
         },
-        color: {
+        colorId: {
           allowNull:false,
-          type: Sequelize.STRING
+          type: Sequelize.INTEGER,
+          references:{
+            model: 'colors',
+            key: 'id'
+          }
         }
       })
   },
