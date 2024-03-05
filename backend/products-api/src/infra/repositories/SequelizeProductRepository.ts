@@ -1,24 +1,43 @@
-import { Op } from 'sequelize';
+import { Model, Op } from 'sequelize';
 import {
   FilterParams,
   IProductRepository,
 } from '../../application/repositories';
 import { Product, ProductProps } from '../../domain';
 import DBProduct from '../database/sequelize/models/DBProduct';
+import DBColor from '../database/sequelize/models/DBColor';
+import DBBrand from '../database/sequelize/models/DBBrand';
+import { Indexable } from '../utils';
 
 export class SequelizeProductRepository extends IProductRepository {
-  constructor(private readonly model = DBProduct) {
+  constructor(
+    private readonly model = DBProduct,
+    private readonly colorModel = DBColor,
+    private readonly brandModel = DBBrand,
+  ) {
     super();
   }
 
-  private async _mapToDB({ id, name, brand, price, color, model }: Product) {
+  private SEQUELIZE_PARAMS = {
+    include: [
+      { model: DBColor, as: 'color', attributes: { exclude: ['id'] } },
+      { model: DBBrand, as: 'brand', attributes: { exclude: ['id'] } },
+    ],
+    attributes: { exclude: ['colorId', 'brandId'] },
+  };
+
+  private async _mapToDB(
+    { id, name, brand, price, color, model }: Product,
+    colorsMap: Indexable<number>,
+    brandsMap: Indexable<number>,
+  ) {
     return {
       id,
       name,
-      brand,
+      brandId: brandsMap[brand],
       model,
       price,
-      color,
+      colorId: colorsMap[color],
     };
   }
 
@@ -30,17 +49,20 @@ export class SequelizeProductRepository extends IProductRepository {
     price,
     model,
   }: DBProduct): Promise<Product> {
-    return new Product({ name, brand, model, color, price }, id);
+    return new Product(
+      { name, brand: brand.name, model, color: color.name, price },
+      id,
+    );
   }
 
   private _mapToProps({ id, name, brand, color, model, price }: DBProduct) {
     return {
       id,
       name,
-      brand,
+      brand: brand.name,
       model,
       price,
-      color,
+      color: color.name,
     };
   }
 
@@ -49,10 +71,10 @@ export class SequelizeProductRepository extends IProductRepository {
     const priceRange = [];
 
     if (brand) {
-      params = { ...params, brand };
+      params = { ...params, '$brand.name$': brand };
     }
     if (color) {
-      params = { ...params, color };
+      params = { ...params, '$color.name$': color };
     }
     if (minPrice) {
       priceRange.push({ [Op.gte]: minPrice });
@@ -63,19 +85,38 @@ export class SequelizeProductRepository extends IProductRepository {
     params = { ...params, price: { [Op.and]: priceRange } };
     return params;
   }
+
+  private async _makeMap(model: typeof DBColor | typeof DBBrand) {
+    const data = await model.findAll();
+    return data.reduce((acc, curr) => {
+      return { ...acc, [curr.name]: curr.id };
+    }, {});
+  }
+
   async create(data: Product[]): Promise<void> {
-    const toDB = await Promise.all(data.map(this._mapToDB));
+    const colorsMap = await this._makeMap(this.colorModel);
+    const brandsMap = await this._makeMap(this.brandModel);
+
+    const toDB = await Promise.all(
+      data.map(prod => this._mapToDB(prod, colorsMap, brandsMap)),
+    );
     await this.model.bulkCreate(toDB);
   }
 
   async update(data: Product): Promise<void> {
-    const { id, name, color, brand, price, model } = await this._mapToDB(data);
+    const colorsMap = await this._makeMap(this.colorModel);
+    const brandsMap = await this._makeMap(this.brandModel);
+    const { id, name, colorId, brandId, price, model } = await this._mapToDB(
+      data,
+      colorsMap,
+      brandsMap,
+    );
     await this.model.update(
       {
         name,
-        brand,
+        brandId,
         model,
-        color,
+        colorId,
         price,
       },
       { where: { id } },
@@ -87,7 +128,7 @@ export class SequelizeProductRepository extends IProductRepository {
   }
 
   async findById(id: string): Promise<Product | null> {
-    const product = await this.model.findByPk(id);
+    const product = await this.model.findByPk(id, this.SEQUELIZE_PARAMS);
     return product ? this._mapToDomain(product) : null;
   }
 
@@ -98,6 +139,7 @@ export class SequelizeProductRepository extends IProductRepository {
           [Op.iRegexp]: name,
         },
       },
+      ...this.SEQUELIZE_PARAMS,
     });
 
     return products.map(this._mapToProps);
@@ -107,12 +149,13 @@ export class SequelizeProductRepository extends IProductRepository {
     const filterParams = this._setParams(params);
     const products = await this.model.findAll({
       where: filterParams,
+      ...this.SEQUELIZE_PARAMS,
     });
     return products.map(this._mapToProps);
   }
 
   async findAll(): Promise<ProductProps[]> {
-    const products = await this.model.findAll();
+    const products = await this.model.findAll(this.SEQUELIZE_PARAMS);
     return products.map(this._mapToProps);
   }
 
@@ -126,11 +169,12 @@ export class SequelizeProductRepository extends IProductRepository {
     const product = await this.model.findOne({
       where: {
         name,
-        brand,
+        '$brand.name$': brand,
         model,
-        color,
+        '$color.name$': color,
         price,
       },
+      ...this.SEQUELIZE_PARAMS,
     });
 
     return Boolean(product);
