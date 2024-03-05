@@ -1,13 +1,14 @@
-import { Link } from "react-router-dom"
+import { FormContainer } from "../../components"
+import LoginForm from "./components/LoginForm"
 
 function Login() {
 
   return (
-    <>
-      <h1>Login Page</h1>
-      <Link to='/signup'>Sign up</Link>
-      <Link to='/home'>Home</Link>
-    </>
+    <main>
+      <FormContainer linkHref="/signup" linkName="Sign Up">
+        {<LoginForm/>}
+      </FormContainer>
+    </main>
   )
 }
 
