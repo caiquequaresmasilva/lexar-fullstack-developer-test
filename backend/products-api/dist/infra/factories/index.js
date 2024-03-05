@@ -15,5 +15,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./makeAuthMiddleware"), exports);
+__exportStar(require("./makeBrandController"), exports);
+__exportStar(require("./makeColorController"), exports);
 __exportStar(require("./makeProductController"), exports);
 __exportStar(require("./makeTransformMiddleware"), exports);

@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const _1 = __importDefault(require("."));
+const DBColor_1 = __importDefault(require("./DBColor"));
+const DBBrand_1 = __importDefault(require("./DBBrand"));
 class DBProduct extends sequelize_1.Model {
 }
 DBProduct.init({
@@ -17,10 +19,6 @@ DBProduct.init({
         allowNull: false,
         type: sequelize_1.STRING,
     },
-    brand: {
-        allowNull: false,
-        type: sequelize_1.STRING,
-    },
     model: {
         allowNull: false,
         type: sequelize_1.STRING,
@@ -29,13 +27,23 @@ DBProduct.init({
         allowNull: false,
         type: sequelize_1.INTEGER,
     },
-    color: {
-        allowNull: false,
-        type: sequelize_1.STRING,
-    },
 }, {
     sequelize: _1.default,
-    modelName: 'products',
+    modelName: 'product',
     timestamps: false,
 });
+// Associação dos produtos com as cores
+DBColor_1.default.hasMany(DBProduct, {
+    foreignKey: 'colorId',
+    onUpdate: 'CASCADE',
+    onDelete: 'NO ACTION',
+});
+DBProduct.belongsTo(DBColor_1.default, { foreignKey: 'colorId', as: 'color' });
+// Associação dos produtos com as marcas
+DBBrand_1.default.hasMany(DBProduct, {
+    foreignKey: 'brandId',
+    onUpdate: 'CASCADE',
+    onDelete: 'NO ACTION',
+});
+DBProduct.belongsTo(DBBrand_1.default, { foreignKey: 'brandId', as: 'brand' });
 exports.default = DBProduct;

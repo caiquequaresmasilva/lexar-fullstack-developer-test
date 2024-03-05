@@ -27,6 +27,8 @@ class App {
     setRoutes() {
         this.app.use('/', routes_1.rootRoutes);
         this.app.use('/product', routes_1.productRoutes);
+        this.app.use('/color', routes_1.colorRoutes);
+        this.app.use('/brand', routes_1.brandRoutes);
     }
     start(PORT) {
         this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
