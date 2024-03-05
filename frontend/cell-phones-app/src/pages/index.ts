@@ -1,6 +1,6 @@
-export { default as AddProduct } from './AddProduct';
-export { default as EditProduct } from './EditProduct';
-export { default as Home } from './Home';
-export { default as Login } from './Login';
-export { default as NotFound } from './NotFound';
-export { default as Signup } from './Signup';
+export * from './AddProduct';
+export * from './EditProduct';
+export * from './Home';
+export * from './Login';
+export * from './NotFound';
+export * from './Signup';
