@@ -6,3 +6,8 @@ type Product = {
   color: string;
   price: number;
 };
+
+type Option = {
+    id: number;
+    name: string;
+  };

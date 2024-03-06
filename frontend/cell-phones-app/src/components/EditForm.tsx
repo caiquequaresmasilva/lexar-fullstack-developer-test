@@ -13,8 +13,10 @@ interface EditFormProps {
   product?: Product,
   action: Action
   message?: string
+  brands: Option[]
+  colors: Option[]
 }
-export default function EditForm({ product, action, message }: EditFormProps) {
+export default function EditForm({ product, action, message, brands, colors }: EditFormProps) {
   const [name, setName] = useState(product?.name || '')
   const [brand, setBrand] = useState(product?.brand || '')
   const [color, setColor] = useState(product?.color || '')
@@ -60,15 +62,13 @@ export default function EditForm({ product, action, message }: EditFormProps) {
             onChange={(e) => setName(e.target.value)}
             required
           />
-          <input
-            type="text"
-            name="brand"
-            min={3}
-            placeholder='Brand'
-            value={brand}
-            onChange={(e) => setBrand(e.target.value)}
-            required
-          />
+
+  
+          <select name="brand" onChange={({ target }) => setBrand(target.value)} value={brand}>
+            {brands.map(({ id, name }) => (<option key={id}>{name}</option>))}
+          </select>
+
+
           <input
             type="text"
             name="model"
@@ -78,15 +78,13 @@ export default function EditForm({ product, action, message }: EditFormProps) {
             onChange={(e) => setModel(e.target.value)}
             required
           />
-          <input
-            type="text"
-            name="color"
-            min={3}
-            placeholder='Color'
-            value={color}
-            onChange={(e) => setColor(e.target.value)}
-            required
-          />
+
+
+          <select name="color" onChange={({ target }) => setColor(target.value)} value={color}>
+            {colors.map(({ id, name }) => (<option key={id}>{name}</option>))}
+          </select>
+
+  
           <input
             type="number"
             name="price"

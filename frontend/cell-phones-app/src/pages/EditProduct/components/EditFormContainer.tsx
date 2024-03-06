@@ -1,19 +1,22 @@
 import { useParams } from "react-router-dom";
 import { EditForm } from "../../../components";
-import { useFetch } from "../../../hooks";
+import { useFetch, useGetOptions } from "../../../hooks";
 
 export default function EditFormContainer() {
   const { id } = useParams()
-  const { data, loading } = useFetch<Product>(
+  const { data: product, loading: prodLoading } = useFetch<Product>(
     `product/${id}`,
     { id: '', name: '', model: '', price: 100, color: '', brand: '' })
+  const { brand, color, loading: optionLoading } = useGetOptions()
   return (
     <div>
-      {loading ? <p>Loading...</p> : (
+      {prodLoading && optionLoading ? <p>Loading...</p> : (
         <EditForm
           action="UPDATE"
-          product={{ ...data, id: id as string }}
+          product={{ ...product, id: id as string }}
           message="Product updated"
+          brands={brand}
+          colors={color}
         />)}
     </div>
   )
