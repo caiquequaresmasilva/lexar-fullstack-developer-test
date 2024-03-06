@@ -18,8 +18,8 @@ interface EditFormProps {
 }
 export default function EditForm({ product, action, message, brands, colors }: EditFormProps) {
   const [name, setName] = useState(product?.name || '')
-  const [brand, setBrand] = useState(product?.brand || '')
-  const [color, setColor] = useState(product?.color || '')
+  const [brand, setBrand] = useState(product?.brand || brands[0].name)
+  const [color, setColor] = useState(product?.color || brands[0].name)
   const [model, setModel] = useState(product?.model || '')
   const [price, setPrice] = useState(product?.price || 100)
 
