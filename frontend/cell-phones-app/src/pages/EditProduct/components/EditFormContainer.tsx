@@ -9,7 +9,12 @@ export default function EditFormContainer() {
     { id: '', name: '', model: '', price: 100, color: '', brand: '' })
   return (
     <div>
-      {loading ? <p>Loading...</p> : <EditForm action="UPDATE" product={{ ...data, id: id as string }} />}
+      {loading ? <p>Loading...</p> : (
+        <EditForm
+          action="UPDATE"
+          product={{ ...data, id: id as string }}
+          message="Product updated"
+        />)}
     </div>
   )
 }
