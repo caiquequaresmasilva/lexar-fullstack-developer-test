@@ -1,9 +1,16 @@
+import { AddFormContainer } from "./components"
+
 function AddProduct() {
 
   return (
-    <>
-      <h1>AddProduct Page</h1>
-    </>
+    <main>
+      <div>
+        <button>REGULAR ADD</button>
+        <button>BULK ADD</button>
+      </div>
+      
+      <AddFormContainer />
+    </main>
   )
 }
 
