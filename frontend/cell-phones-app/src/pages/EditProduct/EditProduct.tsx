@@ -1,10 +1,11 @@
+import { EditFormContainer } from "./components"
 
 function EditProduct() {
 
   return (
-    <>
-      <h1>EditProduct Page</h1>
-    </>
+    <main>
+      <EditFormContainer />
+    </main>
   )
 }
 

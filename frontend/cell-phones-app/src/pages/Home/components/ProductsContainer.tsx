@@ -2,14 +2,6 @@ import { useFetch } from "../../../hooks"
 import { makeFilterUrl } from "../../../utils"
 import { ProductCard } from "."
 
-type Product = {
-  id: string
-  name: string
-  brand: string
-  model: string
-  color: string
-  price: number
-}
 export default function ProductsContainer() {
   const name = ''
   const brand = ''
