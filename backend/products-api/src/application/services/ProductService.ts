@@ -33,10 +33,6 @@ export class ProductService {
     await this.repo.delete(id);
   }
 
-  async search(name: string): Promise<ProductProps[]> {
-    return this.repo.searchByName(name);
-  }
-
   async filter(params: FilterParams): Promise<ProductProps[]> {
     return this.repo.filter(params);
   }

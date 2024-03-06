@@ -55,28 +55,13 @@ export class ProductController {
     }
   }
 
-  async search(req: Request, res: Response): Promise<void> {
-    const { name } = req.query;
-    try {
-      const products = await this.service.search(name as string);
-      res.status(200).json(products);
-    } catch (error) {
-      if (error instanceof CustomError) {
-        res.status(error.status).json({ error: error.message });
-      } else {
-        res
-          .status(500)
-          .json({ error: (<Error>error).message || 'Internal server error' });
-      }
-    }
-  }
-
   async filter(req: Request, res: Response): Promise<void> {
-    const { brand, color, maxPrice, minPrice }: FilterParams = req.query;
+    const { brand, color, maxPrice, minPrice, name }: FilterParams = req.query;
     try {
       const products = await this.service.filter({
         brand,
         color,
+        name,
         maxPrice: maxPrice ? Number(maxPrice) : 0,
         minPrice: minPrice ? Number(minPrice) : 0,
       });
