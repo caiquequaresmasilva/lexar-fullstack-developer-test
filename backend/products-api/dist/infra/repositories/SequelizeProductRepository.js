@@ -50,7 +50,7 @@ class SequelizeProductRepository extends repositories_1.IProductRepository {
             color: color.name,
         };
     }
-    _setParams({ brand, color, minPrice, maxPrice }) {
+    _setParams({ brand, color, minPrice, maxPrice, name }) {
         let params = {};
         const priceRange = [];
         if (brand) {
@@ -58,6 +58,14 @@ class SequelizeProductRepository extends repositories_1.IProductRepository {
         }
         if (color) {
             params = { ...params, '$color.name$': color };
+        }
+        if (name) {
+            params = {
+                ...params,
+                name: {
+                    [sequelize_1.Op.iRegexp]: name,
+                },
+            };
         }
         if (minPrice) {
             priceRange.push({ [sequelize_1.Op.gte]: minPrice });
@@ -98,17 +106,6 @@ class SequelizeProductRepository extends repositories_1.IProductRepository {
     async findById(id) {
         const product = await this.model.findByPk(id, this.SEQUELIZE_PARAMS);
         return product ? this._mapToDomain(product) : null;
-    }
-    async searchByName(name) {
-        const products = await this.model.findAll({
-            where: {
-                name: {
-                    [sequelize_1.Op.iRegexp]: name,
-                },
-            },
-            ...this.SEQUELIZE_PARAMS,
-        });
-        return products.map(this._mapToProps);
     }
     async filter(params) {
         const filterParams = this._setParams(params);

@@ -31,9 +31,6 @@ class ProductService {
         }
         await this.repo.delete(id);
     }
-    async search(name) {
-        return this.repo.searchByName(name);
-    }
     async filter(params) {
         return this.repo.filter(params);
     }

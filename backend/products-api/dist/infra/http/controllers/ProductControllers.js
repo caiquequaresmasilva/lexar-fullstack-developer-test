@@ -59,29 +59,13 @@ class ProductController {
             }
         }
     }
-    async search(req, res) {
-        const { name } = req.query;
-        try {
-            const products = await this.service.search(name);
-            res.status(200).json(products);
-        }
-        catch (error) {
-            if (error instanceof errors_1.CustomError) {
-                res.status(error.status).json({ error: error.message });
-            }
-            else {
-                res
-                    .status(500)
-                    .json({ error: error.message || 'Internal server error' });
-            }
-        }
-    }
     async filter(req, res) {
-        const { brand, color, maxPrice, minPrice } = req.query;
+        const { brand, color, maxPrice, minPrice, name } = req.query;
         try {
             const products = await this.service.filter({
                 brand,
                 color,
+                name,
                 maxPrice: maxPrice ? Number(maxPrice) : 0,
                 minPrice: minPrice ? Number(minPrice) : 0,
             });
