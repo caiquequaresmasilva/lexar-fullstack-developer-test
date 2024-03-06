@@ -1,8 +1,9 @@
 import { productApiService } from "../services";
 type Method = "POST" | "PUT";
+type FormProduct = Omit<Product, "id"> | ProductType2 | ProductType3[];
 
 type ProductFormParams = {
-  product: Omit<Product, "id">;
+  product: FormProduct;
   token: string;
   message: string;
   id?: string;
@@ -22,7 +23,7 @@ export async function handleProductForm({
     token,
   });
 
-  if (![200,201].includes(status)) {
+  if (![200, 201].includes(status)) {
     alert(body.error);
     return false;
   } else {
