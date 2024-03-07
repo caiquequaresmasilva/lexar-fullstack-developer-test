@@ -3,7 +3,7 @@ import { EditFormContainer } from "./components"
 function EditProduct() {
 
   return (
-    <main>
+    <main className='w-full h-screen px-4 flex flex-col items-center'>
       <EditFormContainer />
     </main>
   )

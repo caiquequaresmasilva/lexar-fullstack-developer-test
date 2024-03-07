@@ -18,7 +18,7 @@ function useFetch<T>(path: string, dat: T, refresh?: boolean) {
       }
       setLoading(false);
     })();
-  }, [path, refresh]);
+  }, [path,refresh]);
 
   return { data, loading };
 }

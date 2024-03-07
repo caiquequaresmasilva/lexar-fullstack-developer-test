@@ -5,19 +5,19 @@ function AddProduct() {
   const [regularAdd, setRegularAdd] = useState(true)
 
   return (
-    <main>
-      <div>
+    <main className='w-full h-screen px-4 flex flex-col justify-start items-center'>
+      <div className="flex w-full">
         <button
           onClick={() => setRegularAdd(true)}
-          className={regularAdd ? "text-green-500 font-bold" : "text-green-800 font-bold"}
+          className={`mr-4 hover:text-green-500 ${regularAdd ? "text-green-500" : "text-zinc-100"}`}
         >
-          REGULAR ADD
+          REGULAR
         </button>
         <button
           onClick={() => setRegularAdd(false)}
-          className={!regularAdd ? "text-green-500 font-bold" : "text-green-800 font-bold"}
+          className={`ml-4 hover:text-green-500 ${!regularAdd ? "text-green-500" : "text-zinc-100"}`}
         >
-          BULK ADD
+          BULK
         </button>
       </div>
       {regularAdd ? <AddFormContainer /> : <BulkAddFormContainer />}

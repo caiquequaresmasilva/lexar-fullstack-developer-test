@@ -9,7 +9,7 @@ export default function EditFormContainer() {
     { id: '', name: '', model: '', price: 100, color: '', brand: '' })
   const { brand, color, loading: optionLoading } = useGetOptions()
   return (
-    <div>
+    <div className="flex flex-col items-center  w-1/2 h-1/2 text-xl">
       {prodLoading && optionLoading ? <p>Loading...</p> : (
         <EditForm
           action="UPDATE"

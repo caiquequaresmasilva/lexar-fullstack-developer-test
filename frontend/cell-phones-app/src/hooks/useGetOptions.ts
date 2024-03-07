@@ -27,7 +27,7 @@ function useGetOptions() {
       }
       setLoading(false);
     })();
-  });
+  },[]);
 
   return { brand, color, loading };
 }

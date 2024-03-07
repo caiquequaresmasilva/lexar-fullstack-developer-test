@@ -50,54 +50,67 @@ export default function EditForm({ product, action, message, brands, colors }: E
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            name="name"
-            min={3}
-            placeholder='Name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
 
-  
-          <select name="brand" onChange={({ target }) => setBrand(target.value)} value={brand}>
-            {brands.map(({ id, name }) => (<option key={id}>{name}</option>))}
-          </select>
+    <form className="flex flex-col w-1/2 h-full justify-between text-white" onSubmit={handleSubmit}>
 
+      <input
+        type="text"
+        name="name"
+        className="bg-zinc-100 placeholder-zinc-600 focus:border-green-600 focus:outline-none focus:border-2 p-2 rounded text-black"
+        min={3}
+        placeholder='Name'
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
 
-          <input
-            type="text"
-            name="model"
-            min={3}
-            placeholder='Model'
-            value={model}
-            onChange={(e) => setModel(e.target.value)}
-            required
-          />
+      <label htmlFor="edit-brand-select">
+        Brand:
+        <select className="text-black ml-4" id="edit-brand-select" name="brand" onChange={({ target }) => setBrand(target.value)} value={brand}>
+          {brands.map(({ id, name }) => (<option key={id}>{name}</option>))}
+        </select>
+      </label>
 
 
-          <select name="color" onChange={({ target }) => setColor(target.value)} value={color}>
-            {colors.map(({ id, name }) => (<option key={id}>{name}</option>))}
-          </select>
 
-  
-          <input
-            type="number"
-            name="price"
-            min={100}
-            placeholder='Price'
-            value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
-            required
-          />
+      <input
+        type="text"
+        name="model"
+        className="bg-zinc-100 placeholder-zinc-600 focus:border-green-600 focus:outline-none focus:border-2 p-2 rounded text-black"
+        min={3}
+        placeholder='Model'
+        value={model}
+        onChange={(e) => setModel(e.target.value)}
+        required
+      />
 
-        </div>
-        <button type='submit'>{action}</button>
-      </form>
-    </div>
+      <label htmlFor="edit-color-select">
+        Color:
+        <select className="text-black ml-4" id="edit-color-select" name="color" onChange={({ target }) => setColor(target.value)} value={color}>
+          {colors.map(({ id, name }) => (<option key={id}>{name}</option>))}
+        </select>
+      </label>
+
+
+      <label htmlFor="edit-price-input">
+        Price:
+        <input
+          type="number"
+          id="edit-price-input"
+          className="ml-4 text-black"
+          name="price"
+          min={100}
+          placeholder='Price'
+          value={price}
+          onChange={(e) => setPrice(Number(e.target.value))}
+          required
+        />
+      </label>
+
+
+
+      <button className='text-white bg-green-700 rounded py-1 hover:bg-green-600' type='submit'>{action}</button>
+    </form>
+
   )
 }
