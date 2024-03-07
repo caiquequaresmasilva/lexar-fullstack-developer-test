@@ -2,6 +2,7 @@ import { useFetch } from "../../../hooks"
 import { makeFilterUrl } from "../../../utils"
 import { ProductCard } from "."
 import { useState } from "react"
+import { Loading } from "../../../components"
 
 
 export default function ProductsContainer({ brand, color, maxPrice, minPrice, name, colors }: FilterParams & { colors: Option[] }) {
@@ -11,12 +12,11 @@ export default function ProductsContainer({ brand, color, maxPrice, minPrice, na
 
     return (
         <div className='w-full grid grid-cols-2 sm:grid-cols-4 gap-2 text-center'>
-            {loading ? <p>Loading...</p> : (
+            {loading ? <Loading /> : (
                 <>
                     {data.map(prod => <ProductCard {...prod} key={prod.id} refresh={refreshFunction} colors={colors} />)}
                 </>
             )}
-
         </div>
     )
 }

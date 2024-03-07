@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { EditForm } from "../../../components";
+import { EditForm, Loading } from "../../../components";
 import { useFetch, useGetOptions } from "../../../hooks";
 
 export default function EditFormContainer() {
@@ -10,7 +10,7 @@ export default function EditFormContainer() {
   const { brand, color, loading: optionLoading } = useGetOptions()
   return (
     <div className="flex flex-col items-center  w-1/2 h-1/2 text-xl">
-      {prodLoading && optionLoading ? <p>Loading...</p> : (
+      {prodLoading && optionLoading ? <Loading/> : (
         <EditForm
           action="UPDATE"
           product={{ ...product, id: id as string }}
