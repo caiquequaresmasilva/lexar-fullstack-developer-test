@@ -1,30 +1,136 @@
-# React + TypeScript + Vite
+# Teste técnico Full Stack Javascript Developer Lexart Labs Jr.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Objetivo
 
-Currently, two official plugins are available:
+Desenvolver aplicação web em `React.js` para o gerenciamento de produtos (celulares). Quando devidamente cadastrado e logado, o usuário poderá listar, criar, editar e excluir os produtos em questão. A aplicação foi hospedada no `Vercel`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologias usadas
+* React.js
+* Typescript;
+* Vite
 
-## Expanding the ESLint configuration
+## Desenvolvimento local
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+* Clone o repositório:
+```bash
+git clone git@github.com:caiquequaresmasilva/lexar-fullstack-developer-test.git
+``` 
 
-- Configure the top-level `parserOptions` property like this:
+* Entre na pasta da API no repositório clonado e instale as dependências:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+cd lexar-fullstack-developer-test/frontend/cell-phones-app
+npm install
+``` 
+## Executando a aplicação
+
+* Para rodar a aplicação execute:
+```bash
+npm run dev
+``` 
+
+Para rodar a API, é necessário configurar as variáveis de ambiente para comunicação com as API's auxiliares no arquivo `.env`
+
+```
+VITE_USER_API_HOST=https://vercel.user-api.host/
+VITE_PRODUCT_API_HOST=https://vercel.proruct-api.host/
+``` 
+---
+
+---
+
+## Funcionalidades
+---
+
+
+* `Cadastro`: O usuário deve inserir os dados corretamente para criar seu cadastro no sistema e receberseu token de acesso.
+
+
+![SIGNUP](/images/signup.png)
+
+---
+
+* `Login`: O usuário deve inserir seus dados de cadastro para receber seu token de autenticação e entrar no sistema.
+
+![LOGIN](/images/LOGIN.png)
+
+---
+
+* `Home`: Área principal do app, onde a liosta de produtos disponíveis pode ser observada.
+
+![HOME](/images/HOME.png)
+
+---
+
+* `Edição`: Ao clicar no botão `EDIT` de um produto, o usuário irá para a página de edição, onde as informações do produto em questção podem ser alteradas.
+
+![EDIT](/images/EDIT.png)
+
+---
+
+* `Criar variante`: Ao clicar no botão `ADD VARIANT` de um produto, um modal surgirá, permitindo que crie um novo produto a partir de um produto base, mudando apenas as informações `Price` e `Color`.
+
+![ADD_VARIANT](/images/ADD_VARIANT.png)
+
+---
+
+* `Deletar`: Ao clicar no botão `DELETE` de um produto, um modal surgirá, confirmando o desejo de excluir o produto selecionado.
+
+![DELETE](/images/DELETE.png)
+
+---
+
+* `Pesquisar`: Ao clicar no botão `SEARCH` de um produto, um modal surgirá, permitindo que o usuário pesquise um produto por algum termo que componha seu nome.
+
+![SEARCH](/images/SEARCH.png)
+
+---
+
+* `Filtrar`: Ao clicar no botão `Filter` de um produto, um modal surgirá, permitindo que o usuário filtre os produtos desejado com base nos parâmetros `Brand`, `Color` e `Price`.
+
+![FILTER](/images/FILTER.png)
+
+---
+
+* `Criação regular`: Ao clicar no botão `ADD PRODUCT`  no `header` da página, o usuário irá para a página de c riação de produtos. A primeira alternativa é a criaçao regular de produtos, onde os dados de um produto são inseridos e criados um de cada vez.
+
+![REGULAR-ADD](/images/REGULAR-ADD.png)
+
+---
+* `Criação em lote`: Ao clicar no botão `BULK`, o usuário irá para a opção de criação produtos em lote. Primeiro, deve-se definir o modelo do produto, através dos parâmetros `Name`, `Brand`,`Model`. Em seguida, é liberado a inserção de variantes de preço e cor do produto, pelos parâmetros `Color` e `Price`. Se desejar, o usuário pode voltar e adicionar um novo modelo, assim como mais de suas variantes. Uma lista com os produtos adicionados é mostrada. Ao final, ao clicar no botão `CREATE`, todos os produtos são mandados para serem criado de uma vez do sistema.
+
+![REGULAR-ADD](/images/BULK-ADD.png)
+
+![REGULAR-ADD_LOCK](/images/BULK_ADD_LOCK.png)
+
+![REGULAR-ADD_LIST](/images/BULK_ADD_LIST.png)
+
+---
+
+## Link da aplicação hospedada no Vercel
+```
+https://caique-lexar-cell-phone-app.vercel.app/
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
