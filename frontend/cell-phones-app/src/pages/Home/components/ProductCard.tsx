@@ -61,6 +61,7 @@ export default function ProductCard({ id, name, brand, model, color, price, refr
         <button className="text-green-900 m-1 font-bold hover:text-green-500" onClick={() => setVariant(true)}>ADD VARIANT</button>
         <button className="text-red-900 m-1 font-bold hover:text-red-500" onClick={() => setRemove(true)}>DELETE</button>
       </div>
+
       {/* DELETE MODAL */}
       <div className={`fixed z-50 inset-0 flex justify-center items-center ${remove ? "visible bg-black/90" : "invisible"}`}>
         <div

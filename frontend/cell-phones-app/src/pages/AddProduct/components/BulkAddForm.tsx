@@ -90,7 +90,7 @@ export default function BulkAddForm({ brands, colors }: BulkAddProps) {
     <div className="w-full h-full flex flex-col items-center">
 
       <div className="flex">
-        {/* Container dos Forms */}
+        {/* Forms containers */}
         <div className="flex flex-col ">
           {/* Form 1 */}
 
@@ -161,7 +161,6 @@ export default function BulkAddForm({ brands, colors }: BulkAddProps) {
 
 
         </div>
-        {/* Container do button CREATE */}
 
         <button className={`ml-4 px-2 rounded-3xl text-green-900 font-bold ${toRender.length <= 0 ? 'bg-green-800' : 'bg-green-300'}`} disabled={toRender.length <= 0} onClick={handleBulkCreation}>CREATE</button>
 
