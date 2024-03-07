@@ -26,16 +26,19 @@ function Home() {
   const closeFilter = () => setOpenFilters(false)
 
   return (
-    <main className="w-full h-screen text-[#FFFFFFD6]">
-      <div>
-        <div>
-          <button className="text-green-500 m-4" onClick={() => setFilter(INITIAL_PARAMS)}>ALL</button>
-          <button className="text-green-500 m-4" onClick={handleSearchButton}>SEARCH</button>
-          <button className="text-green-500 m-4" onClick={handleFilterButton}>FILTER</button>
-        </div>
+    <main className='w-full h-screen px-4 flex justify-center items-center'>
+      {!loading && (
+        <div className="flex flex-col w-full h-screen">
+          <div className="self-start pb-2">
+            <button className="text-zinc-100 hover:text-green-500 mr-4" onClick={() => setFilter(INITIAL_PARAMS)}>ALL</button>
+            <button className="text-zinc-100 hover:text-green-500 mr-4" onClick={handleSearchButton}>SEARCH</button>
+            <button className="text-zinc-100 hover:text-green-500 mr-4" onClick={handleFilterButton}>FILTER</button>
+          </div>
 
-        {!loading && <ProductsContainer {...filter} colors={color} />}
-      </div>
+          <ProductsContainer {...filter} colors={color} />
+        </div>
+      )}
+
       {!loading && (
         <>
           <SearchModal updateParams={updateParams} open={openSearch} closeModal={closeSearch} />
