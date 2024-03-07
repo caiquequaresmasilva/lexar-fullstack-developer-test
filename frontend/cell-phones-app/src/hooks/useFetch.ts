@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { productApiService } from "../services";
 
-function useFetch<T>(path: string, dat: T) {
+function useFetch<T>(path: string, dat: T, refresh?: boolean) {
   const [data, setData] = useState(dat);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +18,7 @@ function useFetch<T>(path: string, dat: T) {
       }
       setLoading(false);
     })();
-  }, [path]);
+  }, [path, refresh]);
 
   return { data, loading };
 }
