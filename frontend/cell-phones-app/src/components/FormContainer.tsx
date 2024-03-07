@@ -7,9 +7,9 @@ interface FormContainerProps {
 
 function FormContainer({ children, linkHref, linkName }: FormContainerProps) {
   return (
-    <div>
+    <div className="flex flex-col items-center w-1/2 h-1/2 text-xl">
       {children}
-      <Link to={linkHref}>{linkName}</Link>
+      <Link className="text-white hover:text-green-600" to={linkHref}>{linkName}</Link>
     </div>
   )
 }
