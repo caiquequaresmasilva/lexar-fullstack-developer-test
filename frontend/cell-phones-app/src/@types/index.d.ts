@@ -31,3 +31,19 @@ type ProductType3 = {
     color: string;
   }[];
 };
+
+type FilterParams = {
+  name: string;
+  brand: string;
+  color: string;
+  minPrice: number;
+  maxPrice: number;
+};
+
+type FiltersModalParams = {
+  updateParams: (params: Partial<FilterParams>) => void;
+  open: boolean;
+  closeModal: () => void;
+  colors?: Option[];
+  brands?: Option[];
+};
