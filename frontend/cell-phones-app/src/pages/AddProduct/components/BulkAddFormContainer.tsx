@@ -4,7 +4,7 @@ import { useGetOptions } from "../../../hooks"
 export default function BulkAddFormContainer() {
   const { brand, color, loading } = useGetOptions()
   return (
-    <div>
+    <div className="flex flex-col items-center  w-full h-full text-xl">
       {loading ? <p>Loading...</p> : (
         <BulkAddForm
           brands={brand}
@@ -13,5 +13,5 @@ export default function BulkAddFormContainer() {
       )}
     </div>
   )
-  
+
 }

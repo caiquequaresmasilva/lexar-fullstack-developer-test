@@ -83,56 +83,68 @@ export default function BulkAddForm({ brands, colors }: BulkAddProps) {
     }])
     setAdded(true)
     setPrice(0)
-    setColor('')
+    setColor(colors[0].name)
   }
 
   return (
-    <div>
+    <div className="w-full h-full flex flex-col items-center">
 
-      <div>
+      <div className="flex">
         {/* Container dos Forms */}
-        <div>
+        <div className="flex flex-col ">
           {/* Form 1 */}
-          <div>
-            <form onSubmit={handleSubmit1}>
 
-              <input
-                type="text"
-                name="name"
-                min={3}
-                placeholder='Name'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                disabled={addModel}
-              />
-              <select name="brand" onChange={({ target }) => setBrand(target.value)} value={brand} disabled={addModel}>
+          <form className="flex justify-between items-center" onSubmit={handleSubmit1}>
+
+            <input
+              type="text"
+              name="name"
+              className="bg-zinc-100 placeholder-zinc-600 focus:border-green-600 focus:outline-none focus:border-2 p-1 rounded w-[30%]"
+              min={3}
+              placeholder='Name'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              disabled={addModel}
+            />
+
+            <input
+              type="text"
+              name="model"
+              className="bg-zinc-100 placeholder-zinc-600 focus:border-green-600 focus:outline-none focus:border-2 p-1 rounded w-[30%]"
+              min={3}
+              placeholder='Model'
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
+              required
+              disabled={addModel}
+            />
+
+            <label htmlFor="bulk-brand-select" className="text-zinc-100">
+              Brand:
+              <select className="text-black ml-4 rounded" id="bulk-brand-select" name="brand" onChange={({ target }) => setBrand(target.value)} value={brand} disabled={addModel}>
                 {brands.map(({ id, name }) => (<option key={id}>{name}</option>))}
               </select>
+            </label>
+            <button className="text-green-900 font-bold text-base px-2 py-1 w-fit rounded-md bg-green-500" type='submit'>{addModel ? "ADD NEW MODEL" : 'ADD MODEL'}</button>
+          </form>
 
-              <input
-                type="text"
-                name="model"
-                min={3}
-                placeholder='Model'
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
-                required
-                disabled={addModel}
-              />
-
-              <button type='submit'>{addModel ? "ADD NEW MODEL" : 'ADD MODEL'}</button>
-            </form>
-          </div>
           {/* Form 2 */}
-          <div>
-            <form onSubmit={handleSubmit2}>
-              <select name="color" onChange={({ target }) => setColor(target.value)} value={color} disabled={!addModel}>
+
+          <form className="flex justify-between items-center my-2" onSubmit={handleSubmit2}>
+            <label htmlFor="bulk-color-select" className="text-zinc-100">
+              Color:
+              <select className="text-black rounded ml-2" id="bulk-color-select" name="color" onChange={({ target }) => setColor(target.value)} value={color} disabled={!addModel}>
                 {colors.map(({ id, name }) => (<option key={id}>{name}</option>))}
               </select>
+            </label>
 
+            <label htmlFor="bulk-price-input" className="text-zinc-100">
+              Price:
               <input
                 type="number"
+                id="bulk-price-input"
+                className="text-black rounded w-[40%] ml-4"
                 name="price"
                 placeholder='Price'
                 min={100}
@@ -141,32 +153,46 @@ export default function BulkAddForm({ brands, colors }: BulkAddProps) {
                 disabled={!addModel}
                 required
               />
+            </label>
 
-              <button type="submit" disabled={!addModel}>ADD PRODUCT</button>
-            </form>
 
-          </div>
+            <button className={` text-green-900 font-bold text-base px-2 py-1 w-fit rounded-md ${addModel ? 'bg-green-500' : 'bg-green-800'}`} type="submit" disabled={!addModel}>ADD PRODUCT</button>
+          </form>
+
+
         </div>
         {/* Container do button CREATE */}
-        <div>
-          <button disabled={toRender.length <= 0} onClick={handleBulkCreation}>CREATE</button>
-        </div>
+
+        <button className={`ml-4 px-2 rounded-3xl text-green-900 font-bold ${toRender.length <= 0 ? 'bg-green-800' : 'bg-green-300'}`} disabled={toRender.length <= 0} onClick={handleBulkCreation}>CREATE</button>
+
       </div>
 
       {/* Container para a tabela dos produtos */}
-      <div>
-        {toRender.map((item, ind) => (
-          <div key={ind}>
-            <span>-{item.name}-</span>
-            <span>-{item.brand}-</span>
-            <span>-{item.color}-</span>
-            <span>{item.price}</span>
-            <span>{item.model}</span>
-          </div>
-        ))}
-      </div>
+      <table className="w-[70%] mt-2 bg-zinc-400 text-center rounded text-green-900">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Color</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody className="bg-zinc-300 text-zinc-900">
+          {toRender.map((item, ind) => (
+            <tr key={ind}>
+              <td>{item.name}</td>
+              <td>{item.brand}</td>
+              <td>{item.model}</td>
+              <td>{item.color}</td>
+              <td>{item.price}</td>
+            </tr>
+          ))}
 
+        </tbody>
 
-    </div>
+      </table>
+
+    </div >
   )
 }
