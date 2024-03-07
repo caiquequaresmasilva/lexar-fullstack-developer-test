@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-import { handleDeleteProduct } from "../../../utils"
+import { handleDeleteProduct, handleProductForm } from "../../../utils"
 
 interface ProductProps {
   id: string
@@ -10,17 +10,40 @@ interface ProductProps {
   model: string
   price: number
   color: string
+  colors: Option[]
   refresh: () => void
 
 }
 
-export default function ProductCard({ id, name, brand, model, color, price, refresh }: ProductProps) {
+export default function ProductCard({ id, name, brand, model, color, price, refresh, colors }: ProductProps) {
   const [remove, setRemove] = useState(false)
   const [variant, setVariant] = useState(false)
+  const [vcolor, setVcolor] = useState(color)
+  const [vprice, setVprice] = useState(price)
 
   const handleDelete = async () => {
     const flag = await handleDeleteProduct(id)
     setRemove(false)
+    flag && refresh()
+  }
+
+  const handleVariantForm = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const token = localStorage.getItem('token') || ''
+    const flag = await handleProductForm({
+      product: {
+        name,
+        details: {
+          brand,
+          model,
+          color: vcolor
+        },
+        price: vprice
+      },
+      message: 'Product variant created',
+      token
+    })
+    setVariant(false)
     flag && refresh()
   }
 
@@ -60,10 +83,30 @@ export default function ProductCard({ id, name, brand, model, color, price, refr
         <div
           className="bg-slate-950 w-3/4 h-[45%] sm:w-1/4 md:h-1/2 rounded-xl p-4 flex flex-col justify-between min-w-[350px] cursor-default"
         >
-          <h1>ADD VARIANT</h1>
+          <div>
+            <h1>Create a variant model</h1>
+            <h2>{name}</h2>
+            <p>Brand: {brand}</p>
+            <p>Model: {model}</p>
+          </div>
+          <form onSubmit={handleVariantForm}>
+            <select name="color" onChange={({ target }) => setVcolor(target.value)} value={vcolor} className="text-black">
+              {colors.map(({ id, name }) => (<option key={id}>{name}</option>))}
+            </select>
 
-          <p>Add variant product of {name}</p>
 
+            <input
+              type="number"
+              name="price"
+              min={100}
+              placeholder='Price'
+              className="text-black"
+              value={vprice}
+              onChange={(e) => setVprice(Number(e.target.value))}
+              required
+            />
+            <button type="submit">CREATE</button>
+          </form>
           <button onClick={() => setVariant(false)} className="text-white">CANCEL</button>
 
         </div>
