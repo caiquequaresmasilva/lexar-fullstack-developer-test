@@ -4,7 +4,7 @@ import { SignupForm } from "./components"
 function Signup() {
 
   return (
-    <main>
+    <main className='w-full h-screen px-8 py-16 flex justify-center items-center'>
       <FormContainer linkHref="/login" linkName="Log in">
         {<SignupForm />}
       </FormContainer>
