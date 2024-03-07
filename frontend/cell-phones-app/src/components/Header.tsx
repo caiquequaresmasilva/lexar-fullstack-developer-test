@@ -7,6 +7,7 @@ export default function Header() {
   const navigate = useNavigate()
   const signOut = () => {
     localStorage.setItem('token', '')
+    localStorage.setItem('user', '')
     navigate('/login')
   }
 
