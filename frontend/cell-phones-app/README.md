@@ -46,64 +46,64 @@ VITE_PRODUCT_API_HOST=https://vercel.proruct-api.host/
 * `Cadastro`: O usuário deve inserir os dados corretamente para criar seu cadastro no sistema e receberseu token de acesso.
 
 
-![SIGNUP](/images/signup.png)
+![SIGNUP](/frontend/cell-phones-app/images/signup.png)
 
 ---
 
 * `Login`: O usuário deve inserir seus dados de cadastro para receber seu token de autenticação e entrar no sistema.
 
-![LOGIN](/images/LOGIN.png)
+![LOGIN](/frontend/cell-phones-app/images/LOGIN.png)
 
 ---
 
 * `Home`: Área principal do app, onde a liosta de produtos disponíveis pode ser observada.
 
-![HOME](/images/HOME.png)
+![HOME](/frontend/cell-phones-app/images/HOME.png)
 
 ---
 
 * `Edição`: Ao clicar no botão `EDIT` de um produto, o usuário irá para a página de edição, onde as informações do produto em questção podem ser alteradas.
 
-![EDIT](/images/EDIT.png)
+![EDIT](/frontend/cell-phones-app/images/EDIT.png)
 
 ---
 
 * `Criar variante`: Ao clicar no botão `ADD VARIANT` de um produto, um modal surgirá, permitindo que crie um novo produto a partir de um produto base, mudando apenas as informações `Price` e `Color`.
 
-![ADD_VARIANT](/images/ADD_VARIANT.png)
+![ADD_VARIANT](/frontend/cell-phones-app/images/ADD_VARIANT.png)
 
 ---
 
 * `Deletar`: Ao clicar no botão `DELETE` de um produto, um modal surgirá, confirmando o desejo de excluir o produto selecionado.
 
-![DELETE](/images/DELETE.png)
+![DELETE](/frontend/cell-phones-app/images/DELETE.png)
 
 ---
 
 * `Pesquisar`: Ao clicar no botão `SEARCH` de um produto, um modal surgirá, permitindo que o usuário pesquise um produto por algum termo que componha seu nome.
 
-![SEARCH](/images/SEARCH.png)
+![SEARCH](/frontend/cell-phones-app/images/SEARCH.png)
 
 ---
 
 * `Filtrar`: Ao clicar no botão `Filter` de um produto, um modal surgirá, permitindo que o usuário filtre os produtos desejado com base nos parâmetros `Brand`, `Color` e `Price`.
 
-![FILTER](/images/FILTER.png)
+![FILTER](/frontend/cell-phones-app/images/FILTER.png)
 
 ---
 
 * `Criação regular`: Ao clicar no botão `ADD PRODUCT`  no `header` da página, o usuário irá para a página de c riação de produtos. A primeira alternativa é a criaçao regular de produtos, onde os dados de um produto são inseridos e criados um de cada vez.
 
-![REGULAR-ADD](/images/REGULAR-ADD.png)
+![REGULAR-ADD](/frontend/cell-phones-app/images/REGULAR-ADD.png)
 
 ---
 * `Criação em lote`: Ao clicar no botão `BULK`, o usuário irá para a opção de criação produtos em lote. Primeiro, deve-se definir o modelo do produto, através dos parâmetros `Name`, `Brand`,`Model`. Em seguida, é liberado a inserção de variantes de preço e cor do produto, pelos parâmetros `Color` e `Price`. Se desejar, o usuário pode voltar e adicionar um novo modelo, assim como mais de suas variantes. Uma lista com os produtos adicionados é mostrada. Ao final, ao clicar no botão `CREATE`, todos os produtos são mandados para serem criado de uma vez do sistema.
 
-![REGULAR-ADD](/images/BULK-ADD.png)
+![REGULAR-ADD](/frontend/cell-phones-app/images/BULK-ADD.png)
 
-![REGULAR-ADD_LOCK](/images/BULK_ADD_LOCK.png)
+![REGULAR-ADD_LOCK](/frontend/cell-phones-app/images/BULK_ADD_LOCK.png)
 
-![REGULAR-ADD_LIST](/images/BULK_ADD_LIST.png)
+![REGULAR-ADD_LIST](/frontend/cell-phones-app/images/BULK_ADD_LIST.png)
 
 ---
 
