@@ -1,9 +1,9 @@
 import { memo } from "react"
 
-export default memo(function PriceInput({ state, setState }: TextInputProps<number>) {
+export default memo(function PriceInput({ state, setState }: TextInputProps<string>) {
   const handleOnChange = ({ target: { value } }: OnChangeType) => {
     if (!isNaN(+value)) {
-      setState(+value)
+      setState(value)
     }
   }
   return (

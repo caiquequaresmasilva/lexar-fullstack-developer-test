@@ -13,7 +13,7 @@ export default function VariantModal({ colors }: VariantProps) {
   const { name, brand, color, model, price } = variantData
 
   const [vcolor, setVcolor] = useState(color)
-  const [vprice, setVprice] = useState(price)
+  const [vprice, setVprice] = useState(price.toString())
 
   const handleCancel = () => {
     dispatch(toggleVariantModal())
@@ -21,7 +21,7 @@ export default function VariantModal({ colors }: VariantProps) {
   }
   const reset = () => {
     setVcolor('')
-    setVprice(100)
+    setVprice('100')
   }
 
   const handleForm = async (e: React.FormEvent) => {
@@ -35,7 +35,7 @@ export default function VariantModal({ colors }: VariantProps) {
           model,
           color: vcolor
         },
-        price: vprice
+        price: Number(vprice)
       },
       message: 'Product variant created',
       token
