@@ -47,3 +47,13 @@ type FiltersModalParams = {
   colors?: Option[];
   brands?: Option[];
 };
+
+type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+type TextInputProps<T> = {
+  setState: SetState<T>;
+  state: T;
+};
+
+type OnChangeType = React.ChangeEvent<HTMLInputElement>;
+
+type InputFields = Partial<Omit<Product, "id">>;
