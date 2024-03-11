@@ -22,7 +22,7 @@ export default function useInputFields(inputs?: InputFields): Return {
   const [color, setColor] = useState(inputs?.color || "");
   const [model, setModel] = useState(inputs?.model || "");
   const [price, setPrice] = useState(
-    inputs?.price ? inputs?.price.toString() : "0"
+    inputs?.price ? inputs?.price.toString() : ""
   );
   return [
     { name, brand, color, model, price },

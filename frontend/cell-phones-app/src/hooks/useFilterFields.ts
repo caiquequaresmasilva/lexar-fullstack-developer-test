@@ -17,8 +17,8 @@ type Return = [
 export default function useFilterFields(): Return {
   const [brand, setBrand] = useState("");
   const [color, setColor] = useState("");
-  const [minPrice, setMinPrice] = useState("0");
-  const [maxPrice, setMaxPrice] = useState("0");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
 
   return [
     { brand, color, minPrice, maxPrice },
