@@ -55,5 +55,6 @@ type TextInputProps<T> = {
 };
 
 type OnChangeType = React.ChangeEvent<HTMLInputElement>;
+type OnChangeSelectType = React.ChangeEvent<HTMLSelectElement>;
 
 type InputFields = Partial<Omit<Product, "id">>;
