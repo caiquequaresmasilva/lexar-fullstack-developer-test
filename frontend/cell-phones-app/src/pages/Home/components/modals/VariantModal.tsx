@@ -10,10 +10,11 @@ interface VariantProps {
 export default function VariantModal({ colors }: VariantProps) {
   const { openVariant, variantData } = useAppSelector(selectOpenVariant)
   const dispatch = useAppDispatch()
-  const { name, brand, color, model, price } = variantData
+  const { name, brand, model } = variantData
 
-  const [vcolor, setVcolor] = useState(color)
-  const [vprice, setVprice] = useState(price.toString())
+
+  const [vcolor, setVcolor] = useState("")
+  const [vprice, setVprice] = useState("")
 
   const handleCancel = () => {
     dispatch(toggleVariantModal())
@@ -21,7 +22,7 @@ export default function VariantModal({ colors }: VariantProps) {
   }
   const reset = () => {
     setVcolor('')
-    setVprice('100')
+    setVprice('')
   }
 
   const handleForm = async (e: React.FormEvent) => {
