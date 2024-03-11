@@ -1,12 +1,20 @@
 import { useState } from "react"
+import { useAppDispatch, useAppSelector } from "../../../../redux/hooks"
+import { selectOpenSearch, toggleSearchModal } from "../../../../redux/modalSlice"
+import { setFilters } from "../../../../redux/filterSlice"
 
-export default function SearchModal({ updateParams, open, closeModal }: FiltersModalParams) {
-  const [search, SetSearch] = useState('')
+export default function SearchModal() {
+  const dispatch = useAppDispatch()
+  const open = useAppSelector(selectOpenSearch)
+  const [search, setSearch] = useState('')
+
+  const handleClose = () => dispatch(toggleSearchModal())
+  const handleOnChange = ({ target: { value } }: OnChangeType) => setSearch(value)
   const handleForm = (e: React.FormEvent) => {
     e.preventDefault()
-    updateParams({ name: search })
-    SetSearch('')
-    closeModal()
+    dispatch(setFilters({ name: search }))
+    setSearch('')
+    dispatch(toggleSearchModal())
   }
   return (
     <div className={`fixed z-50 inset-0 flex justify-center items-center ${open ? "visible bg-black/90" : "invisible"}`}>
@@ -18,12 +26,12 @@ export default function SearchModal({ updateParams, open, closeModal }: FiltersM
             className="bg-zinc-200 placeholder-zinc-600 focus:border-green-600 focus:outline-none focus:border-2 p-2 rounded"
             placeholder="Search..."
             value={search}
-            onChange={(e) => SetSearch(e.target.value)}
+            onChange={handleOnChange}
             required
           />
           <button className="text-green-900 font-bold hover:text-green-500 ml-2 bg-green-500 hover:bg-green-400 p-1 rounded" type="submit">SEARCH</button>
         </form>
-        <button className="text-black font-bold mt-2" onClick={closeModal}>CLOSE</button>
+        <button className="text-black font-bold mt-2" onClick={handleClose}>CLOSE</button>
 
       </div>
 
