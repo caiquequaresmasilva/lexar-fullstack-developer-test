@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { handleForm } from '../../../utils'
 import { EmailInput, PasswordInput } from '../../../components'
-import { useLoginFields } from '../../../hooks'
+import { useUserInputs } from '../../../hooks'
 
 type Inputs = {
   email: string,
@@ -10,7 +10,7 @@ type Inputs = {
 }
 
 function LoginForm() {
-  const [{ email, password }, { setEmail, setPassword }] = useLoginFields()
+  const [{ email, password }, { setEmail, setPassword }] = useUserInputs()
   const navigate = useNavigate()
 
   useEffect(() => {
