@@ -22,7 +22,7 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     setFilters: (state, action: PayloadAction<Partial<FilterParams>>) => {
-      state.params = { ...state.params, ...action };
+      state.params = { ...state.params, ...action.payload };
     },
     reset: (state) => {
       state.params = INITIAL_PARAMS;
