@@ -14,7 +14,7 @@ export default memo(function PriceInput({ state, setState }: TextInputProps<stri
         id="variant-price-input"
         name="price"
         pattern="[0-9]*"
-        className="text-black w-[30%] m-2"
+        className="bg-zinc-100 w-[30%] text-black ml-2 focus:border-green-600 focus:outline-none focus:border-2 rounded"
         value={state}
         onChange={handleOnChange}
         required

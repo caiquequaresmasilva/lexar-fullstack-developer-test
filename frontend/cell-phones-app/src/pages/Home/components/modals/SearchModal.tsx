@@ -18,7 +18,7 @@ export default function SearchModal() {
   }
   return (
     <div className={`fixed z-50 inset-0 flex justify-center items-center ${open ? "visible bg-black/90" : "invisible"}`}>
-      <div className="bg-green-100 w-3/4 h-[15%] sm:w-1/4 rounded-xl p-4 flex flex-col justify-between cursor-default items-center">
+      <div className="bg-green-300 w-3/4 h-[15%] sm:w-1/4 rounded-xl p-4 flex flex-col justify-between cursor-default items-center">
         <form onSubmit={handleForm}>
           <input
             type="text"

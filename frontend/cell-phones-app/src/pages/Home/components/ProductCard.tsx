@@ -24,7 +24,7 @@ export default function ProductCard({ id, name, brand, model, color, price }: Pr
   const handleDelete = () => dispatch(toggleDeleteModal(id))
 
   return (
-    <div className='shadow-md shadow-black bg-green-100 rounded-lg py-4'>
+    <div className='shadow-md shadow-black bg-green-200 rounded-lg py-4'>
       <h1 className="font-extrabold text-xl">{name}</h1>
       <div className="flex flex-col items-start pl-4 text-lg">
         <p>Brand: {brand}</p>

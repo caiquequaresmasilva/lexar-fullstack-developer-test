@@ -11,13 +11,12 @@ export default memo(function MaxPriceInput({ state, setState }: TextInputProps<s
       Maximum price:
       <input
         type="text"
-        className="w-[30%] ml-1"
+        className="bg-zinc-100 w-[30%] text-black ml-2 focus:border-green-600 focus:outline-none focus:border-2 rounded"
         id="filter-maxprice-input"
         name="maxPrice"
         pattern="[0-9]*"
         value={state}
         onChange={handleOnChange}
-        required
       />
     </label>
   )

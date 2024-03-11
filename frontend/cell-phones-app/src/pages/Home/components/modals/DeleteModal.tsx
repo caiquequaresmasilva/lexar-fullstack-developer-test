@@ -16,7 +16,7 @@ export default function DeleteModal() {
   return (
     <div className={`fixed z-50 inset-0 flex justify-center items-center ${openDelete ? "visible bg-black/90" : "invisible"}`}>
       <div
-        className="bg-green-100 w-3/4 h-[45%] sm:w-1/4 md:h-1/2 rounded-xl p-4 flex flex-col justify-between min-w-[350px] cursor-default items-center"
+        className="bg-green-300 w-3/4 h-[45%] sm:w-1/4 md:h-1/2 rounded-xl p-4 flex flex-col justify-between min-w-[350px] cursor-default items-center"
       >
         <h1 className="text-xl font-bold">Deleting product</h1>
 

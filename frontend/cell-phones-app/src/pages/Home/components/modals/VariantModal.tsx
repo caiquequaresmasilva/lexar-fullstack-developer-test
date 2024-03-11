@@ -46,7 +46,7 @@ export default function VariantModal({ colors }: VariantProps) {
   return (
     <div className={`fixed z-50 inset-0 flex justify-center items-center ${openVariant ? "visible bg-black/90" : "invisible"}`}>
       <div
-        className="bg-green-100 w-3/4 h-[45%] sm:w-1/4 md:h-1/2 rounded-xl p-4 flex flex-col justify-between min-w-[350px] cursor-default"
+        className="bg-green-300 w-3/4 h-[45%] sm:w-1/4 md:h-1/2 rounded-xl p-4 flex flex-col justify-between min-w-[350px] cursor-default"
       >
         <div className="flex flex-col justify-between h-1/2 text-lg">
           <h1 className="text-xl font-bold self-center">Create a variant model</h1>
