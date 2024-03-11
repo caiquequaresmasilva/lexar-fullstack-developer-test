@@ -6,8 +6,9 @@ Desenvolver aplicação web em `React.js` para o gerenciamento de produtos (celu
 
 ## Tecnologias usadas
 * React.js
-* Typescript;
+* Typescript
 * Vite
+* Tailwind
 
 ## Desenvolvimento local
 
@@ -43,7 +44,7 @@ VITE_PRODUCT_API_HOST=https://vercel.proruct-api.host/
 ---
 
 
-* `Cadastro`: O usuário deve inserir os dados corretamente para criar seu cadastro no sistema e receberseu token de acesso.
+* `Cadastro`: O usuário deve inserir os dados corretamente para criar seu cadastro no sistema e receber seu token de acesso.
 
 
 ![SIGNUP](/frontend/cell-phones-app/images/signup.png)
@@ -56,13 +57,13 @@ VITE_PRODUCT_API_HOST=https://vercel.proruct-api.host/
 
 ---
 
-* `Home`: Área principal do app, onde a liosta de produtos disponíveis pode ser observada.
+* `Home`: Área principal do app, onde a lista de produtos disponíveis pode ser observada.
 
 ![HOME](/frontend/cell-phones-app/images/HOME.png)
 
 ---
 
-* `Edição`: Ao clicar no botão `EDIT` de um produto, o usuário irá para a página de edição, onde as informações do produto em questção podem ser alteradas.
+* `Edição`: Ao clicar no botão `EDIT` de um produto, o usuário irá para a página de edição, onde as informações do produto em questão podem ser alteradas.
 
 ![EDIT](/frontend/cell-phones-app/images/EDIT.png)
 
@@ -92,12 +93,12 @@ VITE_PRODUCT_API_HOST=https://vercel.proruct-api.host/
 
 ---
 
-* `Criação regular`: Ao clicar no botão `ADD PRODUCT`  no `header` da página, o usuário irá para a página de c riação de produtos. A primeira alternativa é a criaçao regular de produtos, onde os dados de um produto são inseridos e criados um de cada vez.
+* `Criação regular`: Ao clicar no botão `ADD PRODUCT`  no `header` da página, o usuário irá para a página de criação de produtos. A primeira alternativa é a criaçao regular de produtos, onde os dados de um produto são inseridos e criados um de cada vez.
 
 ![REGULAR-ADD](/frontend/cell-phones-app/images/REGULAR-ADD.png)
 
 ---
-* `Criação em lote`: Ao clicar no botão `BULK`, o usuário irá para a opção de criação produtos em lote. Primeiro, deve-se definir o modelo do produto, através dos parâmetros `Name`, `Brand`,`Model`. Em seguida, é liberado a inserção de variantes de preço e cor do produto, pelos parâmetros `Color` e `Price`. Se desejar, o usuário pode voltar e adicionar um novo modelo, assim como mais de suas variantes. Uma lista com os produtos adicionados é mostrada. Ao final, ao clicar no botão `CREATE`, todos os produtos são mandados para serem criado de uma vez do sistema.
+* `Criação em lote`: Ao clicar no botão `BULK`, o usuário irá para a opção de criação de produtos em lote. Primeiro, deve-se definir o modelo do produto, através dos parâmetros `Name`, `Brand`,`Model`. Em seguida, é liberado a inserção de variantes de preço e cor do produto, pelos parâmetros `Color` e `Price`. Se desejar, o usuário pode voltar e adicionar um novo modelo, assim como mais de suas variantes. Uma lista com os produtos adicionados é mostrada. Ao final, ao clicar no botão `CREATE`, todos os produtos são mandados para serem criado de uma vez do sistema.
 
 ![REGULAR-ADD](/frontend/cell-phones-app/images/BULK-ADD.png)
 
