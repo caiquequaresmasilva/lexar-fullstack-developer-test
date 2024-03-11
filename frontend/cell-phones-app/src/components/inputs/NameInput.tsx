@@ -7,6 +7,7 @@ export default memo(function NameInput({ setState, state }: TextInputProps<strin
       type="text"
       name="name"
       placeholder="Name"
+      minLength={3}
       className="bg-zinc-100 placeholder-zinc-600 focus:border-green-600 focus:outline-none focus:border-2 p-2 rounded"
       value={state}
       onChange={handleOnChange}
