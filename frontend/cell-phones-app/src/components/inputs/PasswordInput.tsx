@@ -1,7 +1,7 @@
 import { memo } from "react"
 
 export default memo(function PasswordInput({ setState, state }: TextInputProps<string>) {
-  const handleOnChange = (e: OnChangeType) => setState(e.target.value)
+  const handleOnChange = ({ target: { value } }: OnChangeType) => setState(value)
   return (
     <input
       type="password"

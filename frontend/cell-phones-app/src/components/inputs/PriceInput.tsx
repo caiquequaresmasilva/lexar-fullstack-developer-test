@@ -1,6 +1,8 @@
 import { memo } from "react"
-
-export default memo(function PriceInput({ state, setState }: TextInputProps<string>) {
+type PriceInputProps = {
+  disable?: boolean
+} & TextInputProps<string>
+export default memo(function PriceInput({ state, setState, disable = false }: PriceInputProps) {
   const handleOnChange = ({ target: { value } }: OnChangeType) => {
     if (!isNaN(+value)) {
       setState(value)
@@ -17,6 +19,7 @@ export default memo(function PriceInput({ state, setState }: TextInputProps<stri
         className="bg-zinc-100 w-[30%] text-black ml-2 focus:border-green-600 focus:outline-none focus:border-2 rounded"
         value={state}
         onChange={handleOnChange}
+        disabled={disable}
         required
       />
     </label>
