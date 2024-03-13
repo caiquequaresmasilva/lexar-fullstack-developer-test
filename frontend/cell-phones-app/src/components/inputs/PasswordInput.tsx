@@ -1,6 +1,10 @@
 import { memo } from "react"
+import { PasswordRegex } from "../../utils"
 
-export default memo(function PasswordInput({ setState, state }: TextInputProps<string>) {
+type PasswordInputProps = {
+  regex: typeof PasswordRegex
+} & TextInputProps<string>
+export default memo(function PasswordInput({ setState, state, regex }: PasswordInputProps) {
   const handleOnChange = ({ target: { value } }: OnChangeType) => setState(value)
   return (
     <input
@@ -8,8 +12,8 @@ export default memo(function PasswordInput({ setState, state }: TextInputProps<s
       name="password"
       placeholder='Password'
       className="bg-zinc-100 placeholder-zinc-600 focus:border-green-600 focus:outline-none focus:border-2 p-2 rounded"
-      pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$'
-      title='The password must contain at least 8 characters, with uppercase letters, lowercase letters and numbers.'
+      pattern={regex.Pattern}
+      title={regex.Message}
       value={state}
       onChange={handleOnChange}
       required

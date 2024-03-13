@@ -60,3 +60,6 @@ type OmitIdProduct = Omit<Product, "id">;
 type InputFields = Partial<OmitIdProduct>;
 type ProductOrArray = OmitIdProduct | ProductType3[];
 type ResponseMessage = { message?: string; error?: string };
+type Indexable<T> = {
+  [index: string]: T;
+};

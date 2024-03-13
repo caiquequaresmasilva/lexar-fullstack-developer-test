@@ -11,7 +11,6 @@ export default function DeleteModal() {
   const handleCancel = () => dispatch(toggleDeleteModal())
 
   const handleDelete = async () => {
-    // await handleDeleteProduct(deleteId)
     try {
       const { error, message } = await deleteProduct(deleteId).unwrap()
       alert(message || error)

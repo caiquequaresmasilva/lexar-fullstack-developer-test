@@ -1,6 +1,7 @@
 import { useInputFields } from "../hooks"
 import { BrandInput, ColorInput, ModelInput, NameInput, PriceInput } from "."
 import { useCreateProductMutation, useUpdateProductMutation } from "../redux/api/apiSlice"
+import { ProductRegex } from "../utils"
 
 type Action = 'UPDATE' | 'CREATE'
 
@@ -63,7 +64,7 @@ export default function EditForm({ product, action, brands, colors }: EditFormPr
 
     <form className="flex flex-col w-1/2 h-full justify-between text-white" onSubmit={handleSubmit}>
 
-      <NameInput state={name} setState={setName} />
+      <NameInput state={name} setState={setName} regex={ProductRegex} />
       <BrandInput brands={brands} state={brand} setState={setBrand} />
       <ModelInput state={model} setState={setModel} />
       <ColorInput colors={colors} state={color} setState={setColor} />

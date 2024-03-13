@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { handleForm } from "../../../utils";
+import { PasswordRegex, UserRegex, handleForm } from "../../../utils";
 import { useUserInputs } from "../../../hooks";
 import { EmailInput, NameInput, PasswordInput } from "../../../components";
 
@@ -30,9 +30,9 @@ function SignupForm() {
   return (
     <form className="flex flex-col w-1/2 h-full justify-evenly" onSubmit={handleSubmit}>
 
-      <NameInput state={name} setState={setName} />
+      <NameInput state={name} setState={setName} regex={UserRegex} />
       <EmailInput state={email} setState={setEmail} />
-      <PasswordInput state={password} setState={setPassword} />
+      <PasswordInput state={password} setState={setPassword} regex={PasswordRegex}/>
 
       <button className='text-white bg-green-700 rounded py-1 hover:bg-green-600' type="submit">Sign up</button>
     </form>
