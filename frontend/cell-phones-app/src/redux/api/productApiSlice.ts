@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ENVS } from "../../envs";
 
 export const productApiSlice = createApi({
-  reducerPath: "productsApi",
+  reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
     baseUrl: ENVS["PRODUCT_API"],
     prepareHeaders: (headers) => {
