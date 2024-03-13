@@ -1,5 +1,5 @@
 import { EditForm, Loading } from "../../../components";
-import { useGetBrandsQuery, useGetColorsQuery } from "../../../redux/api/apiSlice";
+import { useGetBrandsQuery, useGetColorsQuery } from "../../../redux/api/productApiSlice";
 
 export default function AddFormContainer() {
   const { data: colors = [], isLoading: colorsLoading } = useGetColorsQuery()

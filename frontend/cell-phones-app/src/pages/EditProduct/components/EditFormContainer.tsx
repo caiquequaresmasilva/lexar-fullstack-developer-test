@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { EditForm, Loading } from "../../../components";
 import { useGetOptions } from "../../../hooks";
-import { useGetProductQuery } from "../../../redux/api/apiSlice";
+import { useGetProductQuery } from "../../../redux/api/productApiSlice";
 
 export default function EditFormContainer() {
   const { id } = useParams()

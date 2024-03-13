@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ENVS } from "../../envs";
 
-export const apiSlice = createApi({
+export const productApiSlice = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({
     baseUrl: ENVS["PRODUCT_API"],
@@ -72,4 +72,4 @@ export const {
   useDeleteProductMutation,
   useUpdateProductMutation,
   useGetFilterQuery,
-} = apiSlice;
+} = productApiSlice;

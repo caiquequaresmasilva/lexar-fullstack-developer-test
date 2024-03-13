@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks"
 import { selectOpenVariant, toggleVariantModal } from "../../../../redux/modalSlice"
 import { ColorInput, PriceInput } from "../../../../components"
-import { useCreateProductMutation } from "../../../../redux/api/apiSlice"
+import { useCreateProductMutation } from "../../../../redux/api/productApiSlice"
 
 interface VariantProps {
   colors: Option[]

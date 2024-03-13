@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
 import { useAppSelector } from "../../../../redux/hooks"
 import { selectOpenDelete, toggleDeleteModal } from "../../../../redux/modalSlice"
-import { useDeleteProductMutation } from "../../../../redux/api/apiSlice"
+import { useDeleteProductMutation } from "../../../../redux/api/productApiSlice"
 
 export default function DeleteModal() {
   const { deleteId, openDelete } = useAppSelector(selectOpenDelete)

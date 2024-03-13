@@ -1,6 +1,6 @@
 import { DeleteModal, FilterModal, FiltersBars, ProductsContainer, SearchModal, VariantModal } from "./components"
 import { Loading } from "../../components"
-import { useGetBrandsQuery, useGetColorsQuery } from "../../redux/api/apiSlice"
+import { useGetBrandsQuery, useGetColorsQuery } from "../../redux/api/productApiSlice"
 
 function Home() {
   const { data: colors = [], isLoading: colorsLoading } = useGetColorsQuery()

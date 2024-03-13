@@ -1,6 +1,6 @@
 import { ProductCard } from "."
 import { Loading } from "../../../components"
-import { useGetFilterQuery } from "../../../redux/api/apiSlice"
+import { useGetFilterQuery } from "../../../redux/api/productApiSlice"
 import { selectFilters } from "../../../redux/filterSlice"
 import { useAppSelector } from "../../../redux/hooks"
 

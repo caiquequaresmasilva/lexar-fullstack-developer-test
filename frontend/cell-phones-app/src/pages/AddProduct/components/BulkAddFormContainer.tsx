@@ -1,6 +1,6 @@
 import { BulkAddForm } from "."
 import { Loading } from "../../../components"
-import { useGetBrandsQuery, useGetColorsQuery } from "../../../redux/api/apiSlice"
+import { useGetBrandsQuery, useGetColorsQuery } from "../../../redux/api/productApiSlice"
 
 export default function BulkAddFormContainer() {
   const { data: colors = [], isLoading: colorsLoading } = useGetColorsQuery()

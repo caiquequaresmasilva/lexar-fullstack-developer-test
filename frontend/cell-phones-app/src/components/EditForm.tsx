@@ -1,6 +1,6 @@
 import { useInputFields } from "../hooks"
 import { BrandInput, ColorInput, ModelInput, NameInput, PriceInput } from "."
-import { useCreateProductMutation, useUpdateProductMutation } from "../redux/api/apiSlice"
+import { useCreateProductMutation, useUpdateProductMutation } from "../redux/api/productApiSlice"
 import { ProductRegex } from "../utils"
 
 type Action = 'UPDATE' | 'CREATE'

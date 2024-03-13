@@ -63,3 +63,11 @@ type ResponseMessage = { message?: string; error?: string };
 type Indexable<T> = {
   [index: string]: T;
 };
+type LoginRequest = {
+  email: string;
+  password: string;
+};
+type TokenResponse = {
+  token?: string;
+  error?: string;
+};

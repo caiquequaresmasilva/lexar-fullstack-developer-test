@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useInputFields } from "../../../hooks"
 import { BrandInput, ColorInput, ModelInput, NameInput, PriceInput } from "../../../components"
 import { BulkItemsContainer } from "."
-import { useCreateProductMutation } from "../../../redux/api/apiSlice"
+import { useCreateProductMutation } from "../../../redux/api/productApiSlice"
 import {ProductRegex } from "../../../utils"
 
 
