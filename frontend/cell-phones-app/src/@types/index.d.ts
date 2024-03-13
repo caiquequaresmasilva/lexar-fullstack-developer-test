@@ -67,6 +67,7 @@ type LoginRequest = {
   email: string;
   password: string;
 };
+type CreateUserRequest = LoginRequest & { name: string };
 type TokenResponse = {
   token?: string;
   error?: string;
