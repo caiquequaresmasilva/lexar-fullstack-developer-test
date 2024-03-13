@@ -1,19 +1,17 @@
-import { useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation} from "react-router-dom";
+import { useValidateToken } from "../hooks";
+import { useAppDispatch } from "../redux/hooks";
+import { logout } from "../redux/authSlice";
 
 export default function Header() {
-  const [user, setUser] = useState('')
   const { pathname } = useLocation()
-  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+  useValidateToken()
+
   const signOut = () => {
-    localStorage.setItem('token', '')
-    localStorage.setItem('user', '')
-    navigate('/login')
+    dispatch(logout())
   }
 
-  useEffect(() => {
-    setUser(localStorage.getItem('user') || 'unknown')
-  }, [])
   return (
     <>
       <header className="w-full flex justify-between text-zinc-100 p-4">
@@ -23,12 +21,7 @@ export default function Header() {
         </div>
         <div className="flex">
           <button onClick={signOut} className="mr-4 hover:text-green-500">SIGN OUT</button>
-          <div className="bg-green-800 p-3 rounded-full flex w-fit">
-            <p>Welcome, {user} !</p>
-          </div>
-
         </div>
-
       </header>
       <Outlet />
     </>

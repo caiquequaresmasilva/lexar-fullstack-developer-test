@@ -1,13 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { PasswordRegex, UserRegex, handleForm } from "../../../utils";
+import { PasswordRegex, UserRegex } from "../../../utils";
 import { useUserInputs } from "../../../hooks";
 import { EmailInput, NameInput, PasswordInput } from "../../../components";
-
-type Inputs = {
-  name: string;
-  email: string;
-  password: string;
-};
+import { useCreateUserMutation } from "../../../redux/api/userApiSlice";
 
 function SignupForm() {
   const [
@@ -16,15 +11,15 @@ function SignupForm() {
   ] = useUserInputs()
 
   const navigate = useNavigate();
+  const [createUser] = useCreateUserMutation()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const flag = await handleForm<Inputs>(
-      { name, email, password },
-      "User created."
-    );
-    if (flag) {
+    const { error } = await createUser({ name, email, password }).unwrap()
+    if (!error) {
       navigate("/home");
+    } else {
+      alert(error)
     }
   };
   return (
@@ -32,7 +27,7 @@ function SignupForm() {
 
       <NameInput state={name} setState={setName} regex={UserRegex} />
       <EmailInput state={email} setState={setEmail} />
-      <PasswordInput state={password} setState={setPassword} regex={PasswordRegex}/>
+      <PasswordInput state={password} setState={setPassword} regex={PasswordRegex} />
 
       <button className='text-white bg-green-700 rounded py-1 hover:bg-green-600' type="submit">Sign up</button>
     </form>

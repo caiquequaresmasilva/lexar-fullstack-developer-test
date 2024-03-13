@@ -1,13 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ENVS } from "../../envs";
+import { RootState } from "../store";
 
 export const productApiSlice = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
     baseUrl: ENVS["PRODUCT_API"],
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("token") || "";
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).auth.token;
       headers.set("authorization", `Bearer ${token}`);
+      return headers;
     },
   }),
   tagTypes: ["Product"],

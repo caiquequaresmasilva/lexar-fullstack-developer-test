@@ -1,31 +1,21 @@
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PasswordRegex, handleForm } from '../../../utils'
+import { PasswordRegex} from '../../../utils'
 import { EmailInput, PasswordInput } from '../../../components'
 import { useUserInputs } from '../../../hooks'
-
-type Inputs = {
-  email: string,
-  password: string
-}
+import { useLoginMutation } from '../../../redux/api/userApiSlice'
 
 function LoginForm() {
   const [{ email, password }, { setEmail, setPassword }] = useUserInputs()
+  const [loginMutation] = useLoginMutation()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      navigate('/home')
-    }
-  })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const flag = await handleForm<Inputs>({ email, password }, 'Login successful.', '/login')
-    setEmail('')
-    setPassword('')
-    if (flag) {
+    const { error } = await loginMutation({ email, password }).unwrap()
+    if (!error) {
       navigate('/home')
+    }else{
+      alert(error)
     }
 
   }
