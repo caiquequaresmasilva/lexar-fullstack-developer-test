@@ -1,14 +1,8 @@
-import { useNavigate } from "react-router-dom"
-import { handleProductForm } from "../utils"
 import { useInputFields } from "../hooks"
 import { BrandInput, ColorInput, ModelInput, NameInput, PriceInput } from "."
+import { useCreateProductMutation, useUpdateProductMutation } from "../redux/api/apiSlice"
 
 type Action = 'UPDATE' | 'CREATE'
-type Method = 'POST' | 'PUT'
-
-type MethodMap = {
-  [index in Action]: Method
-}
 
 interface EditFormProps {
   product?: Product,
@@ -17,35 +11,51 @@ interface EditFormProps {
   brands: Option[]
   colors: Option[]
 }
-export default function EditForm({ product, action, message, brands, colors }: EditFormProps) {
+export default function EditForm({ product, action, brands, colors }: EditFormProps) {
   const [
     { brand, color, model, name, price },
     { setBrand, setColor, setModel, setName, setPrice }
   ] = useInputFields(product)
+  const [createProduct] = useCreateProductMutation()
+  const [updateProduct] = useUpdateProductMutation()
 
-  const navigate = useNavigate()
-  const methodMap: MethodMap = {
-    UPDATE: "PUT",
-    CREATE: "POST"
+  const reset = () => {
+    setBrand('')
+    setColor('')
+    setModel('')
+    setName('')
+    setPrice('')
   }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const token = localStorage.getItem('token') || ''
-    const flag = await handleProductForm({
-      product: {
-        name,
-        brand,
-        model,
-        color,
-        price: Number(price)
-      },
-      method: methodMap[action],
-      message: message || '',
-      id: product?.id || '',
-      token
-    })
-    if (flag) {
-      navigate('/home')
+    let payload;
+    try {
+      if (action == 'CREATE') {
+        payload = await createProduct({
+          name,
+          brand,
+          model,
+          color,
+          price: Number(price)
+        }).unwrap()
+      } else {
+        payload = await updateProduct({
+          id: product?.id || '',
+          name,
+          brand,
+          model,
+          color,
+          price: Number(price)
+        }).unwrap()
+      }
+      const { error, message } = payload
+      alert(error || message)
+    } catch (err) {
+      console.log(err)
+    }
+    if (action == 'CREATE') {
+      reset()
     }
   }
 
@@ -58,7 +68,7 @@ export default function EditForm({ product, action, message, brands, colors }: E
       <ModelInput state={model} setState={setModel} />
       <ColorInput colors={colors} state={color} setState={setColor} />
       <PriceInput state={price} setState={setPrice} />
-      
+
       <button className='text-white bg-green-700 rounded py-1 hover:bg-green-600' type='submit'>{action}</button>
     </form>
 

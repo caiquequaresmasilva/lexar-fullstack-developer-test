@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks"
 import { selectOpenVariant, toggleVariantModal } from "../../../../redux/modalSlice"
-import { handleProductForm } from "../../../../utils"
 import { ColorInput, PriceInput } from "../../../../components"
+import { useCreateProductMutation } from "../../../../redux/api/apiSlice"
 
 interface VariantProps {
   colors: Option[]
@@ -11,6 +11,7 @@ export default function VariantModal({ colors }: VariantProps) {
   const { openVariant, variantData } = useAppSelector(selectOpenVariant)
   const dispatch = useAppDispatch()
   const { name, brand, model } = variantData
+  const [createProduct] = useCreateProductMutation()
 
 
   const [vcolor, setVcolor] = useState("")
@@ -27,21 +28,19 @@ export default function VariantModal({ colors }: VariantProps) {
 
   const handleForm = async (e: React.FormEvent) => {
     e.preventDefault()
-    const token = localStorage.getItem('token') || ''
-    const flag = await handleProductForm({
-      product: {
+    try {
+      const { error, message } = await createProduct({
         name,
-        details: {
-          brand,
-          model,
-          color: vcolor
-        },
+        model,
+        color: vcolor,
+        brand,
         price: Number(vprice)
-      },
-      message: 'Product variant created',
-      token
-    })
-    flag && reset()
+      }).unwrap()
+      alert(error || message)
+    } catch (err) {
+      console.log(err)
+    }
+    reset()
   }
   return (
     <div className={`fixed z-50 inset-0 flex justify-center items-center ${openVariant ? "visible bg-black/90" : "invisible"}`}>

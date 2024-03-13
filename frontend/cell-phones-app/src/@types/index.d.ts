@@ -56,5 +56,7 @@ type TextInputProps<T> = {
 
 type OnChangeType = React.ChangeEvent<HTMLInputElement>;
 type OnChangeSelectType = React.ChangeEvent<HTMLSelectElement>;
-
-type InputFields = Partial<Omit<Product, "id">>;
+type OmitIdProduct = Omit<Product, "id">;
+type InputFields = Partial<OmitIdProduct>;
+type ProductOrArray = OmitIdProduct | ProductType3[];
+type ResponseMessage = { message?: string; error?: string };

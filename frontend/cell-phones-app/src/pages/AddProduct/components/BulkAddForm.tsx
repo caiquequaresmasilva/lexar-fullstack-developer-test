@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { handleProductForm } from "../../../utils"
 import { useInputFields } from "../../../hooks"
 import { BrandInput, ColorInput, ModelInput, NameInput, PriceInput } from "../../../components"
 import { BulkItemsContainer } from "."
+import { useCreateProductMutation } from "../../../redux/api/apiSlice"
 
 
 interface BulkAddProps {
@@ -19,6 +19,7 @@ export default function BulkAddForm({ brands, colors }: BulkAddProps) {
   const [added, setAdded] = useState(false)
   const [bulk, setBulk] = useState<BulkType>({})
   const [toRender, setToRender] = useState<Omit<Product, 'id'>[]>([])
+  const [createProduct] = useCreateProductMutation()
 
   const [
     { brand, color, model, name, price },
@@ -35,17 +36,14 @@ export default function BulkAddForm({ brands, colors }: BulkAddProps) {
   }
 
   const handleBulkCreation = async () => {
-    const token = localStorage.getItem('token') || ''
-    const flag = await handleProductForm({
-      product: Object.values(bulk),
-      method: 'POST',
-      message: 'Bulk creation succesful',
-      token
-    })
-    if (flag) {
+    try {
+      const { error } = await createProduct(Object.values(bulk)).unwrap()
+      alert(error || 'Bulk creation successful.')
       reset()
       setBulk({})
       setToRender([])
+    } catch (err) {
+      console.log(err)
     }
   }
 

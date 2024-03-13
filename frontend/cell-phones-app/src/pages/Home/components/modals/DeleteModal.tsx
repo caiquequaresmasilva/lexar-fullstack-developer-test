@@ -1,18 +1,27 @@
 import { useDispatch } from "react-redux"
 import { useAppSelector } from "../../../../redux/hooks"
 import { selectOpenDelete, toggleDeleteModal } from "../../../../redux/modalSlice"
-import { handleDeleteProduct } from "../../../../utils"
+import { useDeleteProductMutation } from "../../../../redux/api/apiSlice"
 
 export default function DeleteModal() {
   const { deleteId, openDelete } = useAppSelector(selectOpenDelete)
   const dispatch = useDispatch()
+  const [deleteProduct] = useDeleteProductMutation()
+
+  const handleCancel = () => dispatch(toggleDeleteModal())
 
   const handleDelete = async () => {
-    await handleDeleteProduct(deleteId)
+    // await handleDeleteProduct(deleteId)
+    try {
+      const { error, message } = await deleteProduct(deleteId).unwrap()
+      alert(message || error)
+    } catch (err) {
+      console.log(err)
+    }
     handleCancel()
   }
 
-  const handleCancel = () => dispatch(toggleDeleteModal())
+
   return (
     <div className={`fixed z-50 inset-0 flex justify-center items-center ${openDelete ? "visible bg-black/90" : "invisible"}`}>
       <div

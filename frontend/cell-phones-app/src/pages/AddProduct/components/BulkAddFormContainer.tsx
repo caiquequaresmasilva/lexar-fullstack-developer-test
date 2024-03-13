@@ -1,15 +1,16 @@
 import { BulkAddForm } from "."
 import { Loading } from "../../../components"
-import { useGetOptions } from "../../../hooks"
+import { useGetBrandsQuery, useGetColorsQuery } from "../../../redux/api/apiSlice"
 
 export default function BulkAddFormContainer() {
-  const { brand, color, loading } = useGetOptions()
+  const { data: colors = [], isLoading: colorsLoading } = useGetColorsQuery()
+  const { data: brands = [], isLoading: brandsLoading } = useGetBrandsQuery()
   return (
     <div className="flex flex-col items-center  w-full h-full text-xl">
-      {loading ? <Loading/> : (
+      {colorsLoading && brandsLoading ? <Loading /> : (
         <BulkAddForm
-          brands={brand}
-          colors={color}
+          brands={brands}
+          colors={colors}
         />
       )}
     </div>

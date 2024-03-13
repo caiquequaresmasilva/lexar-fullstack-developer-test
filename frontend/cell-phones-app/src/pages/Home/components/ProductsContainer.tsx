@@ -1,25 +1,28 @@
-import { useFetch } from "../../../hooks"
-import { makeFilterUrl } from "../../../utils"
 import { ProductCard } from "."
-import { useState } from "react"
 import { Loading } from "../../../components"
-import { useAppSelector } from "../../../redux/hooks"
+import { useGetFilterQuery } from "../../../redux/api/apiSlice"
 import { selectFilters } from "../../../redux/filterSlice"
+import { useAppSelector } from "../../../redux/hooks"
 
-interface ProductsContainerProps {
-  colors: Option[]
-}
-export default function ProductsContainer({ colors }: ProductsContainerProps) {
+
+export default function ProductsContainer() {
   const { brand, color, maxPrice, minPrice, name } = useAppSelector(selectFilters)
-  const { data, loading } = useFetch<Product[]>(makeFilterUrl({ name, brand, color, minPrice, maxPrice }), [])
+  const { data: products, isLoading, isSuccess, isError, error } = useGetFilterQuery({ brand, color, maxPrice, minPrice, name })
+
+  const renderHome = () => {
+    if (isLoading) {
+      return <Loading />
+    } else if (isSuccess) {
+      return products.map(prod => <ProductCard {...prod} key={prod.id} />)
+    } else if (isError) {
+      alert(error.toString())
+      return <></>
+    }
+  }
 
   return (
     <div className='w-full grid grid-cols-2 sm:grid-cols-4 gap-2 text-center'>
-      {loading ? <Loading /> : (
-        <>
-          {data.map(prod => <ProductCard {...prod} key={prod.id} colors={colors} />)}
-        </>
-      )}
+      {renderHome()}
     </div>
   )
 }
