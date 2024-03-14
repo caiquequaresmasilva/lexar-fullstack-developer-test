@@ -8,6 +8,7 @@ export default memo(function PasswordInput({ setState }: TextInputProps<string>)
       setState(value)
       setError('')
     } else {
+      setState('')
       setError(PasswordRegex.Message)
     }
   }

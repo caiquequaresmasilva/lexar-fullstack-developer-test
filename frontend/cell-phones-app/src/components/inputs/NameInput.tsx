@@ -13,6 +13,7 @@ export default memo(function NameInput({ setState, state, regex, model, disable 
       setState(value)
       setError('')
     } else {
+      setState('')
       setError(regex.Message)
     }
   }

@@ -10,6 +10,8 @@ function SignupForm() {
     { setEmail, setName, setPassword }
   ] = useUserInputs()
 
+  const disableButton = () => email === '' || password === '' || name === ''
+
   const navigate = useNavigate();
   const [createUser] = useCreateUserMutation()
 
@@ -29,7 +31,7 @@ function SignupForm() {
       <EmailInput state={email} setState={setEmail} />
       <PasswordInput setState={setPassword} />
 
-      <button className='text-white bg-green-700 rounded py-1 hover:bg-green-600' type="submit">Sign up</button>
+      <button className={`rounded py-1 ${disableButton() ? 'bg-green-900 text-zinc-500' : 'text-zinc-50 bg-green-700  hover:bg-green-600'} `} type='submit' disabled={disableButton()}>Sign up</button>
     </form>
   );
 }

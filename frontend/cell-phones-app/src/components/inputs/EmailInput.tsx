@@ -8,6 +8,7 @@ export default memo(function EmailInput({ setState }: TextInputProps<string>) {
       setState(value)
       setError('')
     } else {
+      setState('')
       setError(EmailRegex.Message)
     }
   }
