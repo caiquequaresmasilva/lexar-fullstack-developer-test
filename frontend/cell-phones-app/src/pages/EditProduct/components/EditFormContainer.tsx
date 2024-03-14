@@ -9,7 +9,7 @@ export default function EditFormContainer() {
   const { data: brands = [], isLoading: brandsLoading } = useGetBrandsQuery()
   return (
     <div className="flex flex-col items-center  w-1/2 h-1/2 text-xl">
-      {colorsLoading && brandsLoading && isLoading ? <Loading /> : (
+      {colorsLoading || brandsLoading || isLoading ? <Loading /> : (
         <EditForm
           action="UPDATE"
           product={{ ...(product as Product), id: id as string }}

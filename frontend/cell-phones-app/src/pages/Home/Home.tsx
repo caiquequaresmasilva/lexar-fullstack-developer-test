@@ -7,7 +7,7 @@ function Home() {
   const { data: brands = [], isLoading: brandsLoading } = useGetBrandsQuery()
   return (
     <main className='w-full h-screen px-4 flex justify-center items-center'>
-      {colorsLoading && brandsLoading ? <Loading /> : (
+      {colorsLoading || brandsLoading ? <Loading /> : (
         <>
           <div className="flex flex-col w-full h-screen">
             <FiltersBars />
