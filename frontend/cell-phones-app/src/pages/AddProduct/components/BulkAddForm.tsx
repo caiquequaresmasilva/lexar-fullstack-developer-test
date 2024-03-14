@@ -21,6 +21,7 @@ export default function BulkAddForm({ brands, colors }: BulkAddProps) {
   const [bulk, setBulk] = useState<BulkType>({})
   const [toRender, setToRender] = useState<Omit<Product, 'id'>[]>([])
   const [createProduct] = useCreateProductMutation()
+  const [errorMsg, setErrorMsg] = useState('')
 
   const [
     { brand, color, model, name, price },
@@ -38,13 +39,14 @@ export default function BulkAddForm({ brands, colors }: BulkAddProps) {
 
   const handleBulkCreation = async () => {
     try {
-      const { error } = await createProduct(Object.values(bulk)).unwrap()
-      alert(error || 'Bulk creation successful.')
+      const { message } = await createProduct(Object.values(bulk)).unwrap()
       reset()
       setBulk({})
       setToRender([])
-    } catch (err) {
-      console.log(err)
+      message && alert(message)
+      setErrorMsg('')
+    } catch (e) {
+      setErrorMsg((e as ApiError).data.error)
     }
   }
 
@@ -109,6 +111,7 @@ export default function BulkAddForm({ brands, colors }: BulkAddProps) {
         </div>
         <button className={`ml-4 px-2 rounded-3xl text-green-900 font-bold ${toRender.length <= 0 ? 'bg-green-800' : 'bg-green-300'}`} disabled={toRender.length <= 0} onClick={handleBulkCreation}>CREATE</button>
       </div>
+      <p className="text-red-500 text-sm my-2">{errorMsg}</p>
       <BulkItemsContainer items={toRender} />
 
     </div >
