@@ -51,7 +51,7 @@ type FiltersModalParams = {
 type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
 type TextInputProps<T> = {
   setState: SetState<T>;
-  state: T;
+  state?: T;
 };
 
 type OnChangeType = React.ChangeEvent<HTMLInputElement>;

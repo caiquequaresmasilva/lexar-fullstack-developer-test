@@ -1,20 +1,27 @@
-import { memo } from "react"
+import { memo, useState } from "react"
+import { EmailRegex, debounceOnChange } from "../../utils"
 
-type EmailInputProps = {
-  disable?: boolean
-} & TextInputProps<string>
-export default memo(function EmailInput({ setState, state, disable = false }: EmailInputProps) {
-  const handleOnChange = ({ target: { value } }: OnChangeType) => setState(value)
+export default memo(function EmailInput({ setState }: TextInputProps<string>) {
+  const [error, setError] = useState('')
+  const handleOnChange = ({ target: { value } }: OnChangeType) => {
+    if (RegExp(EmailRegex.Pattern).test(value)) {
+      setState(value)
+      setError('')
+    } else {
+      setError(EmailRegex.Message)
+    }
+  }
   return (
-    <input
-      type="email"
-      name="email"
-      placeholder='Email'
-      className="bg-zinc-100 placeholder-zinc-600 focus:border-green-600 focus:outline-none focus:border-2 p-2 rounded"
-      value={state}
-      onChange={handleOnChange}
-      disabled={disable}
-      required
-    />
+    <>
+      <input
+        type="text"
+        name="email"
+        placeholder='Email'
+        className="bg-zinc-100 placeholder-zinc-600 focus:border-green-600 focus:outline-none focus:border-2 p-2 rounded"
+        onChange={debounceOnChange(handleOnChange,1000)}
+      />
+      <p className="text-red-500 text-sm">{error}</p>
+    </>
+
   )
 })
