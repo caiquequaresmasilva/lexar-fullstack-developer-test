@@ -11,10 +11,8 @@ interface EditFormProps {
   product?: Product,
   action: Action
   message?: string
-  brands: Option[]
-  colors: Option[]
 }
-export default function EditForm({ product, action, brands, colors }: EditFormProps) {
+export default function EditForm({ product, action }: EditFormProps) {
   const [
     { brand, color, model, name, price },
     { setBrand, setColor, setModel, setName, setPrice }
@@ -63,9 +61,9 @@ export default function EditForm({ product, action, brands, colors }: EditFormPr
     <form className="flex flex-col w-1/2 h-full justify-between text-white" onSubmit={handleSubmit}>
 
       <NameInput state={name} setState={setName} regex={ProductNameRegex} />
-      <BrandInput brands={brands} state={brand} setState={setBrand} />
+      <BrandInput state={brand} setState={setBrand} />
       <NameInput state={model} setState={setModel} regex={ProductNameRegex} model />
-      <ColorInput colors={colors} state={color} setState={setColor} />
+      <ColorInput state={color} setState={setColor} />
       <PriceInput state={price} setState={setPrice} />
 
       <button className='text-white bg-green-700 rounded py-1 hover:bg-green-600' type='submit'>{action}</button>

@@ -4,10 +4,7 @@ import { selectOpenVariant, toggleVariantModal } from "../../../../redux/modalSl
 import { ColorInput, PriceInput } from "../../../../components"
 import { useCreateProductMutation } from "../../../../redux/api/productApiSlice"
 
-interface VariantProps {
-  colors: Option[]
-}
-export default function VariantModal({ colors }: VariantProps) {
+export default function VariantModal() {
   const { openVariant, variantData } = useAppSelector(selectOpenVariant)
   const [errorMsg, setErrorMsg] = useState('')
   const dispatch = useAppDispatch()
@@ -57,7 +54,7 @@ export default function VariantModal({ colors }: VariantProps) {
         </div>
         <form className="flex flex-col justify-center" onSubmit={handleForm}>
 
-          <ColorInput colors={colors} state={vcolor} setState={setVcolor} />
+          <ColorInput state={vcolor} setState={setVcolor} />
 
           <PriceInput state={vprice} setState={setVprice} />
 

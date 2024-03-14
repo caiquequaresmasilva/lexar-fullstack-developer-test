@@ -6,16 +6,12 @@ import { useCreateProductMutation } from "../../../redux/api/productApiSlice"
 import { ProductNameRegex } from "../../../utils"
 
 
-interface BulkAddProps {
-  brands: Option[]
-  colors: Option[]
-}
 
 type BulkType = {
   [index: string]: ProductType3
 }
 
-export default function BulkAddForm({ brands, colors }: BulkAddProps) {
+export default function BulkAddForm() {
   const [addModel, setAddModel] = useState(false)
   const [added, setAdded] = useState(false)
   const [bulk, setBulk] = useState<BulkType>({})
@@ -98,12 +94,12 @@ export default function BulkAddForm({ brands, colors }: BulkAddProps) {
           <form className="flex justify-between items-center" onSubmit={handleSubmit1}>
             <NameInput state={name} setState={setName} disable={addModel} regex={ProductNameRegex} />
             <ModelInput state={model} setState={setModel} disable={addModel} />
-            <BrandInput brands={brands} state={brand} setState={setBrand} disable={addModel} />
+            <BrandInput state={brand} setState={setBrand} disable={addModel} />
             <button className="text-green-900 font-bold text-base px-2 py-1 w-fit rounded-md bg-green-500" type='submit'>{addModel ? "ADD NEW MODEL" : 'ADD MODEL'}</button>
           </form>
           {/* Form 2 */}
           <form className="flex justify-between items-center my-2" onSubmit={handleSubmit2}>
-            <ColorInput colors={colors} state={color} setState={setColor} disable={!addModel} />
+            <ColorInput state={color} setState={setColor} disable={!addModel} />
             <PriceInput state={price} setState={setPrice} disable={!addModel} />
 
             <button className={` text-green-900 font-bold text-base px-2 py-1 w-fit rounded-md ${addModel ? 'bg-green-500' : 'bg-green-800'}`} type="submit" disabled={!addModel}>ADD PRODUCT</button>

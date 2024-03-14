@@ -4,11 +4,8 @@ import { useFilterFields } from "../../../../hooks"
 import { setFilters } from "../../../../redux/filterSlice"
 import { BrandInput, ColorInput, MaxPriceInput, MinPriceInput } from "../../../../components"
 
-interface FilterModalProps {
-  colors: Option[],
-  brands: Option[]
-}
-export default function FilterModal({ brands = [], colors = [] }: FilterModalProps) {
+
+export default function FilterModal() {
   const open = useAppSelector(selectOpenFilter)
   const dispatch = useAppDispatch()
   const [
@@ -35,8 +32,8 @@ export default function FilterModal({ brands = [], colors = [] }: FilterModalPro
         <form className="flex flex-col justify-between items-center h-[80%] " onSubmit={handleForm}>
 
           <div className="flex text-black w-full justify-evenly font-semibold">
-            <BrandInput brands={brands} state={brand} setState={setBrand} />
-            <ColorInput colors={colors} state={color} setState={setColor} />
+            <BrandInput  state={brand} setState={setBrand} />
+            <ColorInput  state={color} setState={setColor} />
           </div>
 
           <div className="flex text-black w-full justify-center font-semibold">
