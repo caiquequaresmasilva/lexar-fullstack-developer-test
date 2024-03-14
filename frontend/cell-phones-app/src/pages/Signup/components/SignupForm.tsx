@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { PasswordRegex, UserRegex } from "../../../utils";
 import { useUserInputs } from "../../../hooks";
 import { EmailInput, NameInput, PasswordInput } from "../../../components";
 import { useCreateUserMutation } from "../../../redux/api/userApiSlice";
+import { UserNameRegex } from "../../../utils";
 
 function SignupForm() {
   const [
@@ -25,9 +25,9 @@ function SignupForm() {
   return (
     <form className="flex flex-col w-1/2 h-full justify-evenly" onSubmit={handleSubmit}>
 
-      <NameInput state={name} setState={setName} regex={UserRegex} />
+      <NameInput state={name} setState={setName} regex={UserNameRegex} />
       <EmailInput state={email} setState={setEmail} />
-      <PasswordInput state={password} setState={setPassword} regex={PasswordRegex} />
+      <PasswordInput setState={setPassword} />
 
       <button className='text-white bg-green-700 rounded py-1 hover:bg-green-600' type="submit">Sign up</button>
     </form>

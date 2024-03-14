@@ -19,7 +19,7 @@ function LoginForm() {
 
   }
   return (
-    <form className="flex flex-col w-1/2 h-full justify-evenly" onSubmit={handleSubmit}>
+    <form className="flex flex-col w-1/2 h-[70%] justify-between" onSubmit={handleSubmit}>
       <EmailInput setState={setEmail} />
       <PasswordInput setState={setPassword} />
       <button className='text-white bg-green-700 rounded py-1 hover:bg-green-600' type='submit'>Log in</button>

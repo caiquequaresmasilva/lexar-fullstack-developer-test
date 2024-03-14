@@ -20,7 +20,7 @@ export default memo(function EmailInput({ setState }: TextInputProps<string>) {
         className="bg-zinc-100 placeholder-zinc-600 focus:border-green-600 focus:outline-none focus:border-2 p-2 rounded"
         onChange={debounceOnChange(handleOnChange,1000)}
       />
-      <p className="text-red-500 text-sm">{error}</p>
+      <p className="text-red-500 text-sm my-2">{error}</p>
     </>
 
   )

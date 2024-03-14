@@ -3,7 +3,7 @@ import { useInputFields } from "../../../hooks"
 import { BrandInput, ColorInput, ModelInput, NameInput, PriceInput } from "../../../components"
 import { BulkItemsContainer } from "."
 import { useCreateProductMutation } from "../../../redux/api/productApiSlice"
-import {ProductRegex } from "../../../utils"
+import { ProductNameRegex } from "../../../utils"
 
 
 interface BulkAddProps {
@@ -94,7 +94,7 @@ export default function BulkAddForm({ brands, colors }: BulkAddProps) {
         <div className="flex flex-col">
           {/* Form 1 */}
           <form className="flex justify-between items-center" onSubmit={handleSubmit1}>
-            <NameInput state={name} setState={setName} disable={addModel} regex={ProductRegex} />
+            <NameInput state={name} setState={setName} disable={addModel} regex={ProductNameRegex} />
             <ModelInput state={model} setState={setModel} disable={addModel} />
             <BrandInput brands={brands} state={brand} setState={setBrand} disable={addModel} />
             <button className="text-green-900 font-bold text-base px-2 py-1 w-fit rounded-md bg-green-500" type='submit'>{addModel ? "ADD NEW MODEL" : 'ADD MODEL'}</button>

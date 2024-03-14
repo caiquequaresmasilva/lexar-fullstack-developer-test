@@ -21,7 +21,7 @@ export default memo(function PasswordInput({ setState }: TextInputProps<string>)
         onChange={debounceOnChange(handleOnChange, 1000)}
         required
       />
-      <p className="text-red-500 text-sm">{error}</p>
+      <p className="text-red-500 text-sm my-2">{error}</p>
     </>
   )
 })
