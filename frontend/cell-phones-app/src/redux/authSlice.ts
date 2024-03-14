@@ -24,6 +24,12 @@ export const authSlice = createSlice({
         state.token = payload.token || "";
       }
     );
+    builder.addMatcher(
+        userApiSlice.endpoints.createUser.matchFulfilled,
+        (state, { payload }) => {
+          state.token = payload.token || "";
+        }
+      );
   },
 });
 
