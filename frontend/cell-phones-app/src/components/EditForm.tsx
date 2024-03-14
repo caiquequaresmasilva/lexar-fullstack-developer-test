@@ -1,7 +1,9 @@
 import { useInputFields } from "../hooks"
-import { BrandInput, ColorInput, ModelInput, NameInput, PriceInput } from "."
+import { BrandInput, ColorInput, NameInput, PriceInput } from "."
 import { useCreateProductMutation, useUpdateProductMutation } from "../redux/api/productApiSlice"
 import { ProductNameRegex } from "../utils"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 type Action = 'UPDATE' | 'CREATE'
 
@@ -17,16 +19,11 @@ export default function EditForm({ product, action, brands, colors }: EditFormPr
     { brand, color, model, name, price },
     { setBrand, setColor, setModel, setName, setPrice }
   ] = useInputFields(product)
+  const [errorMsg, setErrorMsg] = useState('')
   const [createProduct] = useCreateProductMutation()
   const [updateProduct] = useUpdateProductMutation()
+  const navigate = useNavigate()
 
-  const reset = () => {
-    setBrand('')
-    setColor('')
-    setModel('')
-    setName('')
-    setPrice('')
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -50,13 +47,14 @@ export default function EditForm({ product, action, brands, colors }: EditFormPr
           price: Number(price)
         }).unwrap()
       }
-      const { error, message } = payload
-      alert(error || message)
-    } catch (err) {
-      console.log(err)
+      const { message } = payload
+      message && alert(message)
+      setErrorMsg('')
+    } catch (e) {
+      setErrorMsg((e as ApiError).data.error)
     }
     if (action == 'CREATE') {
-      reset()
+      navigate('/home')
     }
   }
 
@@ -66,11 +64,12 @@ export default function EditForm({ product, action, brands, colors }: EditFormPr
 
       <NameInput state={name} setState={setName} regex={ProductNameRegex} />
       <BrandInput brands={brands} state={brand} setState={setBrand} />
-      <ModelInput state={model} setState={setModel} />
+      <NameInput state={model} setState={setModel} regex={ProductNameRegex} model />
       <ColorInput colors={colors} state={color} setState={setColor} />
       <PriceInput state={price} setState={setPrice} />
 
       <button className='text-white bg-green-700 rounded py-1 hover:bg-green-600' type='submit'>{action}</button>
+      <p className="text-red-500 text-sm my-2">{errorMsg}</p>
     </form>
 
   )

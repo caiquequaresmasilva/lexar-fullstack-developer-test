@@ -9,6 +9,7 @@ interface VariantProps {
 }
 export default function VariantModal({ colors }: VariantProps) {
   const { openVariant, variantData } = useAppSelector(selectOpenVariant)
+  const [errorMsg, setErrorMsg] = useState('')
   const dispatch = useAppDispatch()
   const { name, brand, model } = variantData
   const [createProduct] = useCreateProductMutation()
@@ -29,16 +30,17 @@ export default function VariantModal({ colors }: VariantProps) {
   const handleForm = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const { error, message } = await createProduct({
+      const { message } = await createProduct({
         name,
         model,
         color: vcolor,
         brand,
         price: Number(vprice)
       }).unwrap()
-      alert(error || message)
-    } catch (err) {
-      console.log(err)
+      message && alert(message)
+      setErrorMsg('')
+    } catch (e) {
+      setErrorMsg((e as ApiError).data.error)
     }
     reset()
   }
@@ -60,9 +62,10 @@ export default function VariantModal({ colors }: VariantProps) {
           <PriceInput state={vprice} setState={setVprice} />
 
           <button className="text-green-900 font-bold hover:text-green-500" type="submit">CREATE</button>
+          <p className="text-red-500 text-sm my-2">{errorMsg}</p>
         </form>
         <button onClick={handleCancel} className="text-red-900 font-bold hover:text-red-500">CANCEL</button>
-
+        
       </div>
     </div>
   )
