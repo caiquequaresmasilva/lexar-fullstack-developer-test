@@ -72,3 +72,9 @@ type TokenResponse = {
   token?: string;
   error?: string;
 };
+type ApiError = {
+  status: number;
+  data: {
+    error: string;
+  };
+};

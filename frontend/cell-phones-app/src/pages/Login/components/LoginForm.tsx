@@ -2,9 +2,11 @@ import { useNavigate } from 'react-router-dom'
 import { EmailInput, PasswordInput } from '../../../components'
 import { useUserInputs } from '../../../hooks'
 import { useLoginMutation } from '../../../redux/api/userApiSlice'
+import { useState } from 'react'
 
 function LoginForm() {
   const [{ email, password }, { setEmail, setPassword }] = useUserInputs()
+  const [errorMsg, setErrorMsg] = useState('')
   const [loginMutation] = useLoginMutation()
   const navigate = useNavigate()
 
@@ -12,11 +14,11 @@ function LoginForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const { error } = await loginMutation({ email, password }).unwrap()
-    if (!error) {
+    try {
+      await loginMutation({ email, password }).unwrap()
       navigate('/home')
-    } else {
-      alert(error)
+    } catch (e) {
+      setErrorMsg((e as ApiError).data.error)
     }
 
   }
@@ -25,6 +27,7 @@ function LoginForm() {
       <EmailInput setState={setEmail} />
       <PasswordInput setState={setPassword} />
       <button className={`rounded py-1 ${disableButton() ? 'bg-green-900 text-zinc-500' : 'text-zinc-50 bg-green-700  hover:bg-green-600'} `} type='submit' disabled={disableButton()}>Log in</button>
+      <p className="text-red-500 text-sm my-2">{errorMsg}</p>
     </form>
   )
 }
