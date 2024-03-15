@@ -4,6 +4,7 @@ import { BrandInput, ColorInput, ModelInput, NameInput, PriceInput } from "../..
 import { BulkItemsContainer } from "."
 import { useCreateProductMutation } from "../../../redux/api/productApiSlice"
 import { ProductNameRegex } from "../../../utils"
+import { nanoid } from "@reduxjs/toolkit"
 
 
 
@@ -15,7 +16,7 @@ export default function BulkAddForm() {
   const [addModel, setAddModel] = useState(false)
   const [added, setAdded] = useState(false)
   const [bulk, setBulk] = useState<BulkType>({})
-  const [toRender, setToRender] = useState<Omit<Product, 'id'>[]>([])
+  const [toRender, setToRender] = useState<Product[]>([])
   const [createProduct] = useCreateProductMutation()
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -32,6 +33,14 @@ export default function BulkAddForm() {
     setColor('')
     setAddModel(false)
   }
+  const handleDelete = (id: string, name: string, price: number, color: string) => {
+    setToRender(prev => prev.filter(({ id: prodId }) => prodId !== id))
+    setBulk(prev => ({
+      ...prev,
+      [name]: { ...prev[name], data: prev[name].data.filter(({ price: p, color: c }) => p !== price && c !== color) }
+    }))
+  }
+
 
   const handleBulkCreation = async () => {
     try {
@@ -74,6 +83,7 @@ export default function BulkAddForm() {
     }
 
     setToRender(prev => [...prev, {
+      id: nanoid(),
       name,
       brand,
       model,
@@ -108,7 +118,7 @@ export default function BulkAddForm() {
         <button className={`ml-4 px-2 rounded-3xl text-green-900 font-bold ${toRender.length <= 0 ? 'bg-green-800' : 'bg-green-300'}`} disabled={toRender.length <= 0} onClick={handleBulkCreation}>CREATE</button>
       </div>
       <p className="text-red-500 text-sm my-2">{errorMsg}</p>
-      <BulkItemsContainer items={toRender} />
+      <BulkItemsContainer items={toRender} handleDelete={handleDelete} />
 
     </div >
   )
