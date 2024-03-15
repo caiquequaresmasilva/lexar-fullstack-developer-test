@@ -1,11 +1,9 @@
-import { IUserRepository } from '../../application/repositories';
+import { UserRepository } from '../../application/repositories';
 import { User } from '../../domain';
 import DBUser from '../database/sequelize/models/DBUser';
 
-export class SequelizeUserRepository extends IUserRepository {
-  constructor(private readonly model = DBUser) {
-    super();
-  }
+export class SequelizeUserRepository implements UserRepository {
+  constructor(private readonly model = DBUser) {}
 
   private _mapToDomain(dbUser: DBUser): User {
     return new User(

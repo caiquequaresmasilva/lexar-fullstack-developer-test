@@ -13,7 +13,6 @@ class UserService {
     _makeResponse(name, email) {
         return {
             token: this.token.generate({ name, email }),
-            name,
         };
     }
     async create({ name, email, password }) {
