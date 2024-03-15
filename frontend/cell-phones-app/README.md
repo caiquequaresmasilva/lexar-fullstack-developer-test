@@ -100,9 +100,9 @@ VITE_PRODUCT_API_HOST=https://vercel.proruct-api.host/
 ---
 * `Criação em lote`: Ao clicar no botão `BULK`, o usuário irá para a opção de criação de produtos em lote. Primeiro, deve-se definir o modelo do produto, através dos parâmetros `Name`, `Brand`,`Model`. Em seguida, é liberado a inserção de variantes de preço e cor do produto, pelos parâmetros `Color` e `Price`. Se desejar, o usuário pode voltar e adicionar um novo modelo, assim como mais de suas variantes. Uma lista com os produtos adicionados é mostrada. Ao final, ao clicar no botão `CREATE`, todos os produtos são mandados para serem criado de uma vez do sistema.
 
-![REGULAR-ADD](/frontend/cell-phones-app/images/BULK-ADD.png)
+![BULK_ADD](/frontend/cell-phones-app/images/BULK_ADD.png)
 
-![REGULAR-ADD_LOCK](/frontend/cell-phones-app/images/BULK_ADD_LOCK.png)
+![BULK_ADD_LOCK](/frontend/cell-phones-app/images/BULK_ADD_LOCK.png)
 
 ![REGULAR-ADD_LIST](/frontend/cell-phones-app/images/BULK_ADD_LIST.png)
 
