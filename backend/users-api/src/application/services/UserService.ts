@@ -5,7 +5,6 @@ import { IUserRepository } from '../repositories';
 
 export type Token = {
   token: string;
-  name: string;
 };
 
 export class UserService {
@@ -17,7 +16,6 @@ export class UserService {
   private _makeResponse(name: string, email: string): Token {
     return {
       token: this.token.generate({ name, email }),
-      name,
     };
   }
 
