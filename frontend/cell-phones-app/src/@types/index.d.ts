@@ -47,3 +47,34 @@ type FiltersModalParams = {
   colors?: Option[];
   brands?: Option[];
 };
+
+type SetState<T> = React.Dispatch<React.SetStateAction<T>>;
+type TextInputProps<T> = {
+  setState: SetState<T>;
+  state?: T;
+};
+
+type OnChangeType = React.ChangeEvent<HTMLInputElement>;
+type OnChangeSelectType = React.ChangeEvent<HTMLSelectElement>;
+type OmitIdProduct = Omit<Product, "id">;
+type InputFields = Partial<OmitIdProduct>;
+type ProductOrArray = OmitIdProduct | ProductType3[];
+type ResponseMessage = { message?: string; error?: string };
+type Indexable<T> = {
+  [index: string]: T;
+};
+type LoginRequest = {
+  email: string;
+  password: string;
+};
+type CreateUserRequest = LoginRequest & { name: string };
+type TokenResponse = {
+  token?: string;
+  error?: string;
+};
+type ApiError = {
+  status: number;
+  data: {
+    error: string;
+  };
+};

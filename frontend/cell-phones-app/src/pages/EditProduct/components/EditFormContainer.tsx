@@ -1,22 +1,17 @@
 import { useParams } from "react-router-dom";
 import { EditForm, Loading } from "../../../components";
-import { useFetch, useGetOptions } from "../../../hooks";
+import { useGetProductQuery } from "../../../redux/api/productApiSlice";
 
 export default function EditFormContainer() {
   const { id } = useParams()
-  const { data: product, loading: prodLoading } = useFetch<Product>(
-    `product/${id}`,
-    { id: '', name: '', model: '', price: 100, color: '', brand: '' })
-  const { brand, color, loading: optionLoading } = useGetOptions()
+  const { data: product, isLoading } = useGetProductQuery(id as string)
   return (
     <div className="flex flex-col items-center  w-1/2 h-1/2 text-xl">
-      {prodLoading && optionLoading ? <Loading/> : (
+      {isLoading ? <Loading /> : (
         <EditForm
           action="UPDATE"
-          product={{ ...product, id: id as string }}
+          product={{ ...(product as Product), id: id as string }}
           message="Product updated"
-          brands={brand}
-          colors={color}
         />)}
     </div>
   )
