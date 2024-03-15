@@ -1,6 +1,6 @@
 import { User, UserProps } from '../../domain';
 import { TokenGenerator } from '../adapters';
-import { PasswordEmailError, UserAlreadyExistsError } from '../errors';
+import { CustomError } from '../errors';
 import { UserRepository } from '../repositories';
 
 export type Token = {
@@ -13,6 +13,12 @@ export class UserService {
     private readonly token: TokenGenerator,
   ) {}
 
+  private userAlreadyExistsError = new CustomError('User already exists', 400);
+  private passwordEmailError = new CustomError(
+    'Password or email incorrect',
+    400,
+  );
+
   private _makeResponse(name: string, email: string): Token {
     return {
       token: this.token.generate({ name, email }),
@@ -22,7 +28,7 @@ export class UserService {
   async create({ name, email, password }: UserProps): Promise<Token> {
     let user = await this.repo.findByEmail(email);
     if (user) {
-      throw new UserAlreadyExistsError();
+      throw this.userAlreadyExistsError
     }
     const toCreate = new User({
       name,
@@ -36,7 +42,7 @@ export class UserService {
   async signIn({ email, password }: Omit<UserProps, 'name'>): Promise<Token> {
     const user = await this.repo.findByEmail(email);
     if (!user || !user.comparePassword(password)) {
-      throw new PasswordEmailError();
+      throw this.passwordEmailError
     }
     return this._makeResponse(user.name, email);
   }

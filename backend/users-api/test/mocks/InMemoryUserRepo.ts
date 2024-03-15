@@ -1,7 +1,7 @@
-import { IUserRepository } from '../../src/application/repositories';
+import { UserRepository } from '../../src/application/repositories';
 import { User } from '../../src/domain';
 
-export class InMemoryUserRepo extends IUserRepository {
+export class InMemoryUserRepo implements UserRepository {
   public users: User[] = [];
   public clearData() {
     this.users = [];
