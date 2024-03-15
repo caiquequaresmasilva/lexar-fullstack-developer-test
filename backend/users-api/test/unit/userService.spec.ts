@@ -1,4 +1,4 @@
-import { makeInMemoryUserService } from '../../../test/factories';
+import { makeInMemoryUserService } from '../factories';
 
 describe('UserService', () => {
   const userService = makeInMemoryUserService();

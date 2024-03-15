@@ -1,4 +1,4 @@
-import { User } from './User';
+import { User } from '../../src/domain/User';
 
 describe('User domain entity', () => {
   const user = new User({
