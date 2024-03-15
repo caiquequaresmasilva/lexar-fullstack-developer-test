@@ -1,12 +1,12 @@
 import { UserService } from '../../application/services';
-import { JwtAdapter } from '../adapters';
+import { JwtGenerator } from '../adapters';
 import { UserController } from '../http/controllers';
 import { SequelizeUserRepository } from '../repositories';
 
 export function makeUserController(): UserController {
   const service = new UserService(
     new SequelizeUserRepository(),
-    new JwtAdapter(),
+    new JwtGenerator(),
   );
   return new UserController(service);
 }

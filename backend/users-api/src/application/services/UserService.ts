@@ -1,5 +1,5 @@
 import { User, UserProps } from '../../domain';
-import { ITokenAdapter } from '../adapters';
+import { TokenGenerator } from '../adapters';
 import { PasswordEmailError, UserAlreadyExistsError } from '../errors';
 import { UserRepository } from '../repositories';
 
@@ -10,7 +10,7 @@ export type Token = {
 export class UserService {
   constructor(
     private readonly repo: UserRepository,
-    private readonly token: ITokenAdapter,
+    private readonly token: TokenGenerator,
   ) {}
 
   private _makeResponse(name: string, email: string): Token {
