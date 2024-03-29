@@ -1,1 +1,1 @@
-export * from './ITokenAdapter';
+export * from './TokenGenerator';

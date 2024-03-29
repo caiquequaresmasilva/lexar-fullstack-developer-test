@@ -1,5 +1,4 @@
-import { makeInMemoryUserService } from '../../../test/factories';
-import { PasswordEmailError, UserAlreadyExistsError } from '../errors';
+import { makeInMemoryUserService } from '../factories';
 
 describe('UserService', () => {
   const userService = makeInMemoryUserService();
@@ -11,13 +10,12 @@ describe('UserService', () => {
   describe('# create', () => {
     it('Should create a new user and return the token info', async () => {
       const token = await userService.create(mockedUser);
-      expect(token.name).toBe(mockedUser.name);
       expect(token.token).toBe(mockedUser.name + mockedUser.email);
     });
 
     it('Should not be able to create an user that already exists', async () => {
       expect(() => userService.create(mockedUser)).rejects.toThrow(
-        UserAlreadyExistsError,
+        'User already exists',
       );
     });
   });
@@ -28,7 +26,6 @@ describe('UserService', () => {
         password: mockedUser.password,
         email: mockedUser.email,
       });
-      expect(token.name).toBe(mockedUser.name);
       expect(token.token).toBe(mockedUser.name + mockedUser.email);
     });
 
@@ -38,14 +35,14 @@ describe('UserService', () => {
           password: mockedUser.password,
           email: 'WRONGemail',
         }),
-      ).rejects.toThrow(PasswordEmailError);
+      ).rejects.toThrow('Password or email incorrect');
 
       expect(() =>
       userService.signIn({
         password: "notThePassword",
         email: mockedUser.email,
       }),
-    ).rejects.toThrow(PasswordEmailError);
+    ).rejects.toThrow('Password or email incorrect');
     });
   });
 });

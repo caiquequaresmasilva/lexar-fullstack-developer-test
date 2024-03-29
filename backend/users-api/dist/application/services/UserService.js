@@ -10,16 +10,17 @@ class UserService {
         this.repo = repo;
         this.token = token;
     }
+    userAlreadyExistsError = new errors_1.CustomError('User already exists', 400);
+    passwordEmailError = new errors_1.CustomError('Password or email incorrect', 400);
     _makeResponse(name, email) {
         return {
             token: this.token.generate({ name, email }),
-            name,
         };
     }
     async create({ name, email, password }) {
         let user = await this.repo.findByEmail(email);
         if (user) {
-            throw new errors_1.UserAlreadyExistsError();
+            throw this.userAlreadyExistsError;
         }
         const toCreate = new domain_1.User({
             name,
@@ -32,7 +33,7 @@ class UserService {
     async signIn({ email, password }) {
         const user = await this.repo.findByEmail(email);
         if (!user || !user.comparePassword(password)) {
-            throw new errors_1.PasswordEmailError();
+            throw this.passwordEmailError;
         }
         return this._makeResponse(user.name, email);
     }

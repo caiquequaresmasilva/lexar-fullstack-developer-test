@@ -6,7 +6,7 @@ const adapters_1 = require("../adapters");
 const controllers_1 = require("../http/controllers");
 const repositories_1 = require("../repositories");
 function makeUserController() {
-    const service = new services_1.UserService(new repositories_1.SequelizeUserRepository(), new adapters_1.JwtAdapter());
+    const service = new services_1.UserService(new repositories_1.PrismaUserRepository(), new adapters_1.JwtGenerator());
     return new controllers_1.UserController(service);
 }
 exports.makeUserController = makeUserController;

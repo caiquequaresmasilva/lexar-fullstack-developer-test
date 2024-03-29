@@ -15,5 +15,3 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./CustomError"), exports);
-__exportStar(require("./PasswordEmailError"), exports);
-__exportStar(require("./UserAlreadyExistsError"), exports);

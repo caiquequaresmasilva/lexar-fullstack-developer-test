@@ -1,1 +1,1 @@
-export * from './JwtAdapter';
+export * from './JwtGenerator';
