@@ -1,1 +1,1 @@
-export * from './SequelizeUserRepository';
+export * from './PrismaUserRepository';
