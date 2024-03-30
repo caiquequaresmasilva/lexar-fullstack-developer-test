@@ -62,7 +62,7 @@ export class ProductController {
         brand,
         color,
         name,
-        maxPrice: maxPrice ? Number(maxPrice) : 0,
+        maxPrice: maxPrice ? Number(maxPrice) : 1000000,
         minPrice: minPrice ? Number(minPrice) : 0,
       });
       res.status(200).json(products);
