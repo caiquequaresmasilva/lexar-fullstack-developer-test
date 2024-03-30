@@ -124,6 +124,7 @@ export default class PrismaProductRepository implements IProductRepository {
     minPrice,
     name,
   }: FilterParams): Promise<ProductProps[]> {
+    
     const products = await this.prisma.phoneProduct.findMany({
       where: {
         color: {
